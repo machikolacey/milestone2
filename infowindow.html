@@ -20,12 +20,14 @@
 let yourtour = [];
 let yourtourids = [];
 var locations = [];
-var locations = [
+
+/*var locations = [
   ['Brighton Toy and Model Museum', 50.828689, -0.141210, "Brighton Toy and Model Museum is one of the World's great toy museums. Located in the 'artists' city of Brighton on Britain's South Coast, and densely packed into a set of four Victorian cellars covering four thousand square feet, the museum\'s displays draw on guest collections and a core collection of over ten thousand items.", "https://www.brightontoymuseum.co.uk/", "52-55 TRAFALGAR STREET, BRIGHTON, SUSSEX", "BN1 4EB", "AmX8TBbHfHE"],
   ['Clock Tower', 50.823814, -0.143577, "The Clock Tower (sometimes called the Jubilee Clock Tower) is a free-standing clock tower in the centre of Brighton, part of the English city of Brighton and Hove. Built in 1888 in commemoration of Queen Victoria's Golden Jubilee, the distinctive structure included innovative structural features and became a landmark in the popular and fashionable seaside resort. ", "https://brightonmuseums.org.uk/royalpavilion/", "4/5 Pavilion Buildings, Brighton", "BN1 1EE", ""],
   ['Royal Pavillion', 50.822548, -0.137664, "The Royal Pavilion is an exotic palace in the centre of Brighton with a colourful history. Built as a seaside pleasure palace for King George IV, this historic house mixes Regency grandeur with the visual style of India and China.", "https://brightonmuseums.org.uk/royalpavilion/", "4/5 Pavilion Buildings, Brighton", "BN1 1EE", "kqzGXRN6fK8"],
   ['British Airways i360', 50.821512, -0.150928, "Breathtaking views are best admired with a glass in hand! Enjoy a drink from the South Coast’s highest bar, the Nyetimber Sky Bar. a wide selection of drinks are available included local beers from Harvey Brewery, wines from Nyetimber, Brighton Gin and Folkington’s juices from nearby orchards.", "https://britishairwaysi360.com/", "Lower Kings Road, Brighton", "BN1 2LN", "yaphx4CNbO0"]
   ];
+  */
 
   fetch("./data-brighton.json", {
       headers : { 
@@ -38,6 +40,7 @@ var locations = [
   .then(function(data){
     locations =  data;
     console.log(locations);
+    initialize();
   });
 
  
@@ -52,41 +55,59 @@ var locations = [
  7 = youtube
  */ 
 var infowindow;
-  function initialize() {
 
+
+var map;
+
+
+  function initialize() {
     var myOptions = {
       center: new google.maps.LatLng(33.890542, 151.274856),
       zoom: 14,
       mapTypeId: google.maps.MapTypeId.ROADMAP
 
     };
-    var map = new google.maps.Map(document.getElementById("default"),myOptions);
+   map = new google.maps.Map(document.getElementById("default"),myOptions);
 
     setMarkers(map, locations)
 
   }
   function getDestination(){
       console.log('clicked');
+
+  /*    for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              geocoder.geocode({'address': originList[i]},
+                  showGeocodedAddressOnMap(false));
+              for (var j = 0; j < results.length; j++) {
+                geocoder.geocode({'address': destinationList[j]},
+                    showGeocodedAddressOnMap(true));
+                    document.getElementById('distance').innerHTML += originList[i] + ' to ' + destinationList[j] +
+                    ': ' + results[j].distance.text + ' in ' +
+                    results[j].duration.text + '<br>';
+              }
+
+            }*/
   }
 
 function updateTour(){
 
 let text = yourtourids.map((item) => {
-  return '<li>'+locations[item][0]+'</li>';
+  return '<li>'+locations[item]["title"] + "<button class='remove-from-tour' destid='"+item+"' onclick='removeLocation("+item+")'>Remove</button></li>";
 }).join(' ');
 
-    document.getElementById("yourtour").innerHTML =  "<h2>Your Tour</h2><ul>"+text+'</ul>'; 
+    document.getElementById("yourtour").innerHTML =  "<h2>Your Tour</h2><ul>"+text+"</ul> <button id='check-distance' onclick='checkDistance()'>Check Distance</button>"; 
 
 }
 
 function addLocation(id){
 
-    console.log(yourtour);
-   let tour = locations[id];
-   console.log(tour);
-   //if(yourtour.includes(tour))
-   yourtour.push(tour);
-  yourtourids.push(id);
+    if(!yourtourids.includes(id)){
+      yourtourids.push(id);
+      document.getElementById("add-to-yourtour").disabled = true;
+    }else{
+      alert("You've already added this place to your tour.");
+    }
 
 console.log(yourtourids);
 
@@ -96,12 +117,51 @@ console.log(yourtourids);
 
 
 function removeLocation(id){
-console.log('remove' + id);
 
+  if(yourtourids.includes(id)){
+    yourtourids = yourtourids.filter(item => item !== id);
+  }   
+
+  console.log(yourtourids);
+  updateTour();  
 }
 
-
-
+function checkDistance(){
+console.log('check distance');
+console.log(yourtourids);
+var service = new google.maps.DistanceMatrixService();
+  for(var i = 1 ; i < yourtourids.length; i++){
+    
+    console.log(locations);
+    
+    var origin = new google.maps.LatLng(locations[i-1]['lat'], locations[i-1]['lng']);
+    var destination = new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']);
+    calculateAndDisplayRoute( origin, destination);
+  }
+}
+function calculateAndDisplayRoute(origin, destination) {
+  console.log('calculateAndDisplayRoute');
+   
+var directionsService = new google.maps.DirectionsService();
+ var directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsService.route(
+            {
+              origin: origin,
+              destination: destination,
+              travelMode: 'WALKING'
+            },
+            function(response, status) {
+              console.log(response);
+              if (status === 'OK') {
+               console.log(response);
+                directionsRenderer.setDirections(response);
+                directionsRenderer.setMap(map);
+                directionsRenderer.setPanel(document.getElementById('direction-panel'));
+              } else {
+                window.alert('Directions request failed due to ' + status);
+              }
+            });
+}
 function setMarkers(map,locations){
 
       var marker, i
@@ -109,24 +169,30 @@ function setMarkers(map,locations){
     for (i = 0; i < locations.length; i++)
     {  
 
-    let title   = locations[i][0]
-    let lat     = locations[i][1]
-    let long    = locations[i][2]
-    let add     =  locations[i][3]
+   // let title   = locations[i]['title']
+  //  let lat     = locations[i]['lat']
+  //  let long    = locations[i]['lng']
+  //  let add     =  locations[i]['description']
     let location = locations [i]
     let id      = i
-    let embed   = "<iframe width='570' height='321' src='https://www.youtube.com/embed/"+locations[i][7]+"' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
-        let button = "<button class='add-to-tour' id='add-to-yourtour' onclick='addLocation("+id+")'>Add to your tour</button>";
+    let embed   = "";
+if(locations[i]['youtube'] != ""){    
+    embed = "<iframe width='570' height='321' src='https://www.youtube.com/embed/"+locations[i]['youtube']+"' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
+}
+    let button = "<button class='add-to-tour' id='add-to-yourtour' onclick='addLocation("+id+")'>Add to your tour</button>";
     let currentlocation;
 
-     var markercontent = "<h3>" + locations[i][0] +  "</h3>";   
-     var content = "<h3>" + locations[i][0] +  "</h3>"+ locations[i][3]+ 
-     embed+ button;   
+     var markercontent = "<h3>" + locations[i]['title'] +  "</h3>";   
+     var content = 
+     "<h3>" + locations[i]['title'] + 
+       "</h3>"+ locations[i]['description'] +   
+       embed+ button+
+       "";   
 
-    latlngset = new google.maps.LatLng(lat, long);
+    latlngset = new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']);
 
              var marker = new google.maps.Marker({  
-                   id:id,  map: map, title: title , position: latlngset  , content:content
+                   id:id,  map: map, title: locations[i]['title'] , position: latlngset  , content:content
             });
             map.setCenter(marker.getPosition())
       
@@ -152,7 +218,7 @@ function setMarkers(map,locations){
   </script>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
  </head>
- <body onload="initialize()">
+ <body onload="">
 <div class="container">
 <h2>Please click on a marker to see the details of the location.</h2>
     <div class="row">
@@ -163,7 +229,9 @@ function setMarkers(map,locations){
             <div id="factdiv" style="width:100%;height:350px;">
         
             </div>
-     
+            <div id="distance">
+
+            </div>
         </div> 
         
         </div>
@@ -171,6 +239,7 @@ function setMarkers(map,locations){
   <div id="yourtour">
 
   </div>
+  <div id="direction-panel"></div>
 
 </div>
 

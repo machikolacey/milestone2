@@ -44,7 +44,29 @@
             "postcode" :  "BN1 2LN",
             "youtube": "yaphx4CNbO0",
             "category": 1
+          },
+          {
+            "title": "Brighton Museum & Art Gallery",
+            "lat":50.823773,
+            "lng": -0.137798,
+            "description":"Brighton Museum & Art Gallery is located in the Royal Pavilion garden, at the heart of the city’s cultural quarter. Its diverse collections bring together the arts and history to tell stories about the city and the world we live in.",
+            "website":"https://brightonmuseums.org.uk/brighton/",
+            "address": "Royal Pavilion Gardens, Pavilion Parade, Brighton", 
+            "postcode" :  "BN1 1EE",
+            "youtube": "Qf2QPiXjA-4",
+            "category": 1
+          },
+          {
+            "title": "Foodilic",
+            "lat":50.823815,
+            "lng": -0.142948,
+            "description":"Rustic, all-day cafe-eatery offering a healthy salad-oriented buffet with veggie and vegan options.",
+            "website":"https://www.foodilic.com/",
+            "address": "131-132 North St, Brighton", 
+            "postcode" :  "BN1 1RG",
+            "youtube": "vxoaWh9Rn58",
+            "category": 2
           }
-
+         
 
     ]

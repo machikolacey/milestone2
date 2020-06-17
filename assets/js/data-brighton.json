@@ -62,9 +62,60 @@
             "lng": -0.142948,
             "description":"Rustic, all-day cafe-eatery offering a healthy salad-oriented buffet with veggie and vegan options.",
             "website":"https://www.foodilic.com/",
-            "address": "131-132 North St, Brighton", 
+            "address": "131-132 North St, Brighton",
+            "youtube" : "vxoaWh9Rn58", 
             "postcode" :  "BN1 1RG",
-            "youtube": "vxoaWh9Rn58",
+            "category": 2
+          },
+          {
+            "title": "Little Miss Piggies",
+            "lat":50.824395, 
+            "lng": -0.132180,
+            "description":"Family run café serving traditional English breakfasts, bruch and snacks & drinks at affordable prices. All food 'home' cooked on the premises and a 'create your own' breakfast is also available with prices from 50 pence.",
+            "website":"https://www.piggies.cafe/",
+            "address": "85 St James's Street, Brighton", 
+            "postcode" :  "BN2 1TP",
+            "category": 2
+          },
+          {
+            "title": "Wheat & Beans",
+            "lat":50.824848, 
+            "lng": -0.134957,
+            "description":"Artisan food and coffee on the go, inspired by the flavours of the Mediterranean and beyond. Located in the ever-fascinating city of Brighton, UK.",
+            "website":"https://www.facebook.com/wheatandbeans",
+            "address": "117 St. James's Street, Brighton", 
+            "postcode" :  "BN2 1TH",
+            "category": 2
+          },
+          {
+            "title": "Cakes The Difference",
+            "lat":50.870142, 
+            "lng": -0.136786,
+            "description":"Amazing home baked cakes and home made meals. Made in Brighton by the Queen cake baker Denise.",
+            "website":"http://www.cakesthedifference.co.uk/",
+            "address": "142 Mackie Avenue, Brighton", 
+            "postcode" :  "BN1 8SB",
+            "category": 2
+          },
+          {
+            "title": "Julien Plumart Cafe",
+            "lat":50.831082, 
+            "lng": -0.140726,
+            "description":"Amazing home baked cakes and home made meals. Made in Brighton by the Queen cake baker Denise.",
+            "website":"http://www.cakesthedifference.co.uk/",
+            "address": "48 Queens Road, Brighton", 
+            "postcode" :  "BN1 3XB",
+            "youtube" : "K_JzkS_tFl8",
+            "category": 2
+          },
+          {
+            "title": "Leman Tea Room",
+            "lat":50.823674, 
+            "lng": -0.134917,
+            "description":"Small, probably the smallest tea room in Brighton. Traditional English design, vintage table settings. Serving homemade cakes, freshly made sandwiches, Leman style breakfasts, Cream and Afternoon Teas, wide selection of teas as well as coffees and other soft drinks.",
+            "website":"https://leman-tea-room.business.site/",
+            "address": "15A Madeira Place, Brighton", 
+            "postcode" :  "BN2 1TN",
             "category": 2
           }
          

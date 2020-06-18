@@ -1,3 +1,7 @@
 .filtercategory li{
-cursor:pointer;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 15px;
+    background: #57bfba;
+    padding: 0 10px;
 }

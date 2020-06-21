@@ -1,8 +1,10 @@
 let yourtour = [];
 let yourtourids = [];
 var locations = [];
-var totaldistance=0, totalduration=0;
+var totaldistance=0, totalduration=0, totalcalories=0;
 let orglocations = [];
+let currentcategory = 0;
+var markers = [];
   fetch("./assets/js/data-brighton.json", {
       headers : { 
         'Content-Type': 'application/json',
@@ -11,19 +13,51 @@ let orglocations = [];
     })
     .then(resp=>resp.json())
     .then(function(data){
+
     locations =  orglocations = data;
-    console.log(locations);
-    initialize();
+
+    for (var i = 0; i < locations.length; i++) {
+      locations[i]["id"] = i;
+    }
+    currentcategory=1;
+  filterCategory(currentcategory);
+  
   });
+
+
+  var markerIcon = {
+    url: 'http://maps.google.com/mapfiles/ms/icons/ylw-pushpin.png',
+    scaledSize: new google.maps.Size(30, 30),
+    origin: new google.maps.Point(0, 0),
+    anchor: new google.maps.Point(32,65)
+  };
 
 var infowindow;
 var map;
 
 
   function initialize() {
+    let zoom = 14;let lat =0; let lng = 0;
+    switch(currentcategory){
+      case 1 :
+      zoom = 14;
+      lat = 33.890542;
+      lng = 151.274856;
+      break;
+      case 2 :
+      zoom = 12;
+      lat = 50.864671;
+      lng = -0.169750;
+      break;
+      case 3:
+      zoom = 11;
+      lat = 50.842827;
+      lng = -0.148028;
+      break;
+    }
     var myOptions = {
-      center: new google.maps.LatLng(33.890542, 151.274856),
-      zoom: 14,
+      center: new google.maps.LatLng(lat, lng),
+      zoom: zoom,
       mapTypeId: google.maps.MapTypeId.ROADMAP
 
     };
@@ -37,7 +71,7 @@ var map;
 function updateTour(){
 
 let text = yourtourids.map((item) => {
-  return '<li>'+locations[item]["title"] + "<button class='remove-from-tour' destid='"+item+"' onclick='removeLocation("+item+")'>Remove</button></li>";
+  return '<li>'+orglocations[item]["title"] + "<button class='remove-from-tour' destid='"+orglocations[item]["id"]+"' onclick='removeLocation("+item+")'>Remove</button></li>";
 }).join(' ');
 let text1 = "<h2>Your Tour</h2><ul>"+text+"</ul> ";
  let text2 = "";
@@ -45,7 +79,7 @@ let text1 = "<h2>Your Tour</h2><ul>"+text+"</ul> ";
  if(yourtourids.length > 1){
   let e = document.createElement('div');
   text2  = "<button id='check-distance' onclick='checkDistance()'>Check Distance</button>";
-
+  text2 += "<button id='check-distance' onclick='resetDistance()'>Reset Distance Map</button>";
  }
 
  document.getElementById("yourtour").innerHTML =  text1 + text2; 
@@ -61,25 +95,29 @@ function addLocation(id){
       alert("You've already added this place to your tour.");
     }
 
-
-
    updateTour();
 }
 
 
-
 function removeLocation(id){
-
   if(yourtourids.includes(id)){
     yourtourids = yourtourids.filter(item => item !== id);
   }   
 
+  initialize();
   updateTour();  
-  
+
 }
 
+
+function resetDistance(){
+  initialize();
+  updateTour(); 
+}
+
+
 function filterCategory(category){
-console.log(category);
+currentcategory = category;
 locations = orglocations.filter( i => i.category == category );
 console.log(locations);
 initialize();
@@ -88,7 +126,7 @@ initialize();
 function checkDistance(){
 console.log('check distance');
 console.log(yourtourids);
-totaldistance=0, totalduration=0;
+
 var service = new google.maps.DistanceMatrixService();
   for(var i = 1 ; i < yourtourids.length; i++){
     var origin = new google.maps.LatLng(locations[i-1]['lat'], locations[i-1]['lng']);
@@ -102,6 +140,7 @@ function calculateAndDisplayRoute(origin, destination) {
    
 var directionsService = new google.maps.DirectionsService();
  var directionsRenderer = new google.maps.DirectionsRenderer();
+ deleteMarkers();
         directionsService.route(
             {
               origin: origin,
@@ -110,14 +149,20 @@ var directionsService = new google.maps.DirectionsService();
             },
             function(response, status) {
               var routeinfo = response.routes[0].legs[0];
-       
-           totaldistance += routeinfo.distance.value;
+           totaldistance +=  routeinfo.distance.value;
+         //  totaldistance = totaldistance /1000; //KM
+
            totalduration += routeinfo.duration.value;
+     //      totalduration = Math.round( totalduration / 60 );// MINUTES
+           let totalmiutes = Math.round( totalduration/60 );
            console.log(routeinfo.distance.text);
            console.log(routeinfo.duration.text);
-           document.getElementById("totaldistance").innerHTML = "Total distance ="+ totaldistance /1000 +"km"; 
-           document.getElementById("totalduration").innerHTML ="Total duration ="+ Math.round( totalduration / 60 )+"mins";
-              if (status === 'OK') {
+           document.getElementById("totaldistance").innerHTML = "Total distance ="+ Math.round( totaldistance/1000 ) + "KM"; 
+           document.getElementById("totalduration").innerHTML ="Total duration ="+ totalmiutes + "MINUTES";
+         
+           document.getElementById("totalcalories").innerHTML = "Calories consumed = " + Math.round(totalmiutes*10)+"kcal";
+         
+           if (status === 'OK') {
                console.log(response);
                 directionsRenderer.setDirections(response);
                 directionsRenderer.setMap(map);
@@ -138,26 +183,41 @@ function setMarkers(map,locations){
     let location = locations [i]
     let id      = i
     let embed   = "";
-
+    let photo = "";
 
     if(locations[i]['youtube'] != undefined){    
         embed = "<iframe width='570' height='321' src='https://www.youtube.com/embed/"+locations[i]['youtube']+"' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
     }
-    let button = "<button class='add-to-tour' id='add-to-yourtour' onclick='addLocation("+id+")'>Add to your tour</button>";
+    if(locations[i]['photo'] != undefined){    
+      photo = "<img src='assets/images/"+locations[i]['photo']+"' alt='"+locations[i]['title']+"' class='location-photo' />"
+    }
+    let button = "<button class='add-to-tour' id='add-to-yourtour' onclick='addLocation("+locations[i]['id']+")'>Add to your tour</button>";
     let currentlocation;
 
      var markercontent = "<h3>" + locations[i]['title'] +  "</h3>";   
      var content = 
      "<h3>" + locations[i]['title'] + 
-       "</h3>"+ locations[i]['description'] +   
-       embed+ button+
-       "";   
+       "</h3>"+ locations[i]['description'] +  
+        photo + embed + button ;   
 
     latlngset = new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']);
 
              var marker = new google.maps.Marker({  
-                   id:id,  map: map, title: locations[i]['title'] , position: latlngset  , content:content
+                   id:id,  map: map,
+                    title: "Click to see the details",
+                     position: latlngset  , 
+                     icon: markerIcon,
+                       label: {
+                        fontSize: "10pt",
+                        labelClass: "my-custom-class-for-label", 
+                        fontWeight:"700",
+                        color:"Red",
+                        text:  locations[i]['shortitle']
+                       },
+                     content:content,
+                     optimized: false
             });
+            markers.push(marker);
             map.setCenter(marker.getPosition())
       
             google.maps.event.addListener(marker,'click', (function(marker,markercontent, position, content){ 
@@ -179,3 +239,13 @@ function setMarkers(map,locations){
                 })(marker,markercontent,infowindow)); 
     } 
   }
+
+  function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  } 
+function deleteMarkers() {
+  setMapOnAll(null);
+  markers = [];
+}

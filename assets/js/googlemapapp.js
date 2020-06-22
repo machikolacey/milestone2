@@ -26,10 +26,10 @@ var markers = [];
 
 
   var markerIcon = {
-    url: 'http://maps.google.com/mapfiles/ms/icons/ylw-pushpin.png',
+    url: 'assets/images/mapicons/marker-pink-map-mountain.png',
     scaledSize: new google.maps.Size(30, 30),
     origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(32,65)
+    anchor: new google.maps.Point(42,65)
   };
 
 var infowindow;
@@ -69,22 +69,34 @@ var map;
  
 
 function updateTour(){
-
 let text = yourtourids.map((item) => {
-  return '<li>'+orglocations[item]["title"] + "<button class='remove-from-tour' destid='"+orglocations[item]["id"]+"' onclick='removeLocation("+item+")'>Remove</button></li>";
+  return '<li>'+orglocations[item]["title"] + "<button class='btn btn-outline-danger btn-sm remove-from-tour' destid='"+orglocations[item]["id"]+"' onclick='removeLocation("+item+")'>Remove</button></li>";
 }).join(' ');
-let text1 = "<h2>Your Tour</h2><ul>"+text+"</ul> ";
+let text1 = "<h2>Your Tour</h2><ol>"+text+"</ol> ";
  let text2 = "";
 
  if(yourtourids.length > 1){
   let e = document.createElement('div');
-  text2  = "<button id='check-distance' onclick='checkDistance()'>Check Distance</button>";
-  text2 += "<button id='check-distance' onclick='resetDistance()'>Reset Distance Map</button>";
+  text2  = "<button id='check-distance' class='btn btn-outline-primary' onclick='checkDistance()'>Check Distance</button>";
+  text2 += "<button id='check-distance' class='btn btn-outline-primary' onclick='resetDistance()'>Reset Distance Map</button>";
  }
 
  document.getElementById("yourtour").innerHTML =  text1 + text2; 
 
 }
+
+function updateTourNoButtons(){
+  let text = yourtourids.map((item) => {
+    return '<li>'+orglocations[item]["title"] + "</li>";
+  }).join(' ');
+  let text1 = "<h2>Your Tour</h2><ol>"+text+"</ol> ";
+  let text2 = "";
+  
+   document.getElementById("yourtour-modal").innerHTML =  text1 + text2; 
+  
+  }
+
+
 
 function addLocation(id){
 
@@ -117,8 +129,10 @@ function resetDistance(){
 
 
 function filterCategory(category){
+ // doument.getElementsByClassName('category').removeClass('active');
 currentcategory = category;
 locations = orglocations.filter( i => i.category == category );
+//document.getElementById('category'+category).addClass('active');
 console.log(locations);
 initialize();
 }
@@ -161,12 +175,18 @@ var directionsService = new google.maps.DirectionsService();
            document.getElementById("totalduration").innerHTML ="Total duration ="+ totalmiutes + "MINUTES";
          
            document.getElementById("totalcalories").innerHTML = "Calories consumed = " + Math.round(totalmiutes*10)+"kcal";
+   
+           document.getElementById("totaldistance-modal").innerHTML = "Total distance ="+ Math.round( totaldistance/1000 ) + "KM"; 
+           document.getElementById("totalduration-modal").innerHTML ="Total duration ="+ totalmiutes + "MINUTES";
          
+           document.getElementById("totalcalories-modal").innerHTML = "Calories consumed = " + Math.round(totalmiutes*10)+"kcal";
+
            if (status === 'OK') {
                console.log(response);
                 directionsRenderer.setDirections(response);
                 directionsRenderer.setMap(map);
                 directionsRenderer.setPanel(document.getElementById('direction-panel'));
+              //  directionsRenderer.setPanel(document.getElementById('direction-panel-modal'));
               } else {
                 window.alert('Directions request failed due to ' + status);
               }
@@ -186,34 +206,36 @@ function setMarkers(map,locations){
     let photo = "";
 
     if(locations[i]['youtube'] != undefined){    
-        embed = "<iframe width='570' height='321' src='https://www.youtube.com/embed/"+locations[i]['youtube']+"' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
+        embed = "<iframe width='100%' height='200' src='https://www.youtube.com/embed/"+locations[i]['youtube']+"' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
     }
-    if(locations[i]['photo'] != undefined){    
+    if(locations[i]['youtube'] == undefined && locations[i]['photo'] != undefined){    
       photo = "<img src='assets/images/"+locations[i]['photo']+"' alt='"+locations[i]['title']+"' class='location-photo' />"
     }
-    let button = "<button class='add-to-tour' id='add-to-yourtour' onclick='addLocation("+locations[i]['id']+")'>Add to your tour</button>";
+    let button = "<button class='btn btn-outline-primary add-to-tour' id='add-to-yourtour' onclick='addLocation("+locations[i]['id']+")'>Add to your tour</button>";
     let currentlocation;
 
      var markercontent = "<h3>" + locations[i]['title'] +  "</h3>";   
      var content = 
      "<h3>" + locations[i]['title'] + 
-       "</h3>"+ locations[i]['description'] +  
-        photo + embed + button ;   
+       "</h3><div class='row'><div class='col-sm-6'>"+
+       photo + embed 
+       + "</div><div class='col-sm-6'>"
+        + locations[i]['description'] + button + "</div></div>"  ;   
 
     latlngset = new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']);
 
              var marker = new google.maps.Marker({  
                    id:id,  map: map,
-                    title: "Click to see the details",
+                    title: locations[i]['title'],
                      position: latlngset  , 
                      icon: markerIcon,
-                       label: {
+                     
+                    /*   label: {
                         fontSize: "10pt",
-                        labelClass: "my-custom-class-for-label", 
+                        labelClass: "maplabel", 
                         fontWeight:"700",
-                        color:"Red",
                         text:  locations[i]['shortitle']
-                       },
+                       },*/
                      content:content,
                      optimized: false
             });
@@ -248,4 +270,11 @@ function setMarkers(map,locations){
 function deleteMarkers() {
   setMapOnAll(null);
   markers = [];
+}
+
+
+function openPrintModal(){
+  var tourcontent = document.getElementById('tourcontent').innerHTML;
+ document.getElementById('printcontent').innerHTML = tourcontent; 
+  document.getElementById('printModal').style.display='block';
 }

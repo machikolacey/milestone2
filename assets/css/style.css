@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Noto+Sans+JP:wght@100;300;400;500;700&family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+body, html{
+  font-family:'Montserrat', 'Oswald',sans-serif;
+}
+.btn-primary {
+  background-color: #ea5e98;
+  border-color: #ea5e98;
+}
+.maplabel {
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #fff;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  font-size: 12px;
+  text-align: center;
+  white-space: nowrap;
+  padding: 2px;
+  padding-bottom:125px;
+}
+
+#printModal .btn{display:none !important;}
+
+#direction-panel{display:none;}
+.map-icon-label .map-icon {
+	font-size: 14px;
+	color: #FFFFFF;
+	line-height: 48px;
+	text-align: center;
+	white-space: nowrap;
+}
+
+
+dl, ol, ul {
+    margin: 0;
+    padding: 0;
+}
+
+dl li, ol li, ul li{
+    padding:0;
+}
+iframe{
+    max-width:100%;
+}
+
+.filtercategory li{
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 15px;
+    background: #57bfba;
+    padding: 0 10px;
+}
+
+.gm-style-iw-d img{
+    max-width:100%;
+}
+
+#direction-panel{
+    direction: ltr;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 80%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  .my-custom-class-for-label {
+    width: 50px; 
+    height: 20px;
+  
+    border: 1px solid #eb3a44;
+    border-radius: 5px;
+    background: #fee1d7;
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #eb3a44;
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  

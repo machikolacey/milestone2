@@ -70,21 +70,21 @@ var map;
 
 function updateTour(){
 let text = yourtourids.map((item) => {
-  return '<li>'+orglocations[item]["title"] + "<button class='btn btn-outline-danger btn-sm remove-from-tour' destid='"+orglocations[item]["id"]+"' onclick='removeLocation("+item+")'>Remove</button></li>";
+  return '<li>'+orglocations[item]["title"] + "<button class='btn btn-danger btn-sm remove-from-tour' destid='"+orglocations[item]["id"]+"' onclick='removeLocation("+item+")'>Remove</button></li>";
 }).join(' ');
 let text1 = "<h2>Your Tour</h2><ol>"+text+"</ol> ";
  let text2 = "";
 
  if(yourtourids.length > 1){
   let e = document.createElement('div');
-  text2  = "<button id='check-distance' class='btn btn-outline-primary' onclick='checkDistance()'>Check Distance</button>";
-  text2 += "<button id='check-distance' class='btn btn-outline-primary' onclick='resetDistance()'>Reset Distance Map</button>";
+  text2  = "<button id='check-distance' class='btn btn-primary' onclick='checkDistance()'>Check Distance</button>";
+  text2 += "<button id='check-distance' class='btn btn-primary' onclick='resetDistance()'>Reset Distance Map</button>";
  }
 
  document.getElementById("yourtour").innerHTML =  text1 + text2; 
 
 }
-
+/*
 function updateTourNoButtons(){
   let text = yourtourids.map((item) => {
     return '<li>'+orglocations[item]["title"] + "</li>";
@@ -95,6 +95,7 @@ function updateTourNoButtons(){
    document.getElementById("yourtour-modal").innerHTML =  text1 + text2; 
   
   }
+  */
 
 
 
@@ -140,11 +141,19 @@ initialize();
 function checkDistance(){
 console.log('check distance');
 console.log(yourtourids);
-
 var service = new google.maps.DistanceMatrixService();
-  for(var i = 1 ; i < yourtourids.length; i++){
-    var origin = new google.maps.LatLng(locations[i-1]['lat'], locations[i-1]['lng']);
-    var destination = new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']);
+yourtourids.forEach(distancCalculator);
+ document.getElementById("check-distance").style.display="block";
+}
+
+function distancCalculator(id, key){
+  console.log('distancCalculator');
+  console.log(yourtourids[key+1]);
+  
+  let nextid = yourtourids[key+1];
+  if(nextid!=undefined){
+    var origin = new google.maps.LatLng(orglocations[id]['lat'], orglocations[id]['lng']);
+    var destination = new google.maps.LatLng(orglocations[nextid]['lat'], orglocations[nextid]['lng']);
     calculateAndDisplayRoute( origin, destination);
   }
 }
@@ -175,18 +184,17 @@ var directionsService = new google.maps.DirectionsService();
            document.getElementById("totalduration").innerHTML ="Total duration ="+ totalmiutes + "MINUTES";
          
            document.getElementById("totalcalories").innerHTML = "Calories consumed = " + Math.round(totalmiutes*10)+"kcal";
-   
-           document.getElementById("totaldistance-modal").innerHTML = "Total distance ="+ Math.round( totaldistance/1000 ) + "KM"; 
-           document.getElementById("totalduration-modal").innerHTML ="Total duration ="+ totalmiutes + "MINUTES";
-         
-           document.getElementById("totalcalories-modal").innerHTML = "Calories consumed = " + Math.round(totalmiutes*10)+"kcal";
 
            if (status === 'OK') {
-               console.log(response);
+            
+            console.log(response);
                 directionsRenderer.setDirections(response);
                 directionsRenderer.setMap(map);
-                directionsRenderer.setPanel(document.getElementById('direction-panel'));
-              //  directionsRenderer.setPanel(document.getElementById('direction-panel-modal'));
+                directionsRenderer.setPanel(document.getElementById('direction-panel-modal'));
+          //     directionsRenderer.setPanel(document.getElementById('direction-panel-modal'));
+     //     var textnode = document.createTextNode('<button onclick="openPrintModal()" class="btn btn-primary" id="check-directions">Check Directions</button>');         // Create a text node
+        var text =   "<button id='check-directions' class='btn btn-primary' onclick='openPrintModal()'>Check Distance</button>";
+          document.getElementById('yourtour-panel').appendChild(text); 
               } else {
                 window.alert('Directions request failed due to ' + status);
               }
@@ -211,7 +219,7 @@ function setMarkers(map,locations){
     if(locations[i]['youtube'] == undefined && locations[i]['photo'] != undefined){    
       photo = "<img src='assets/images/"+locations[i]['photo']+"' alt='"+locations[i]['title']+"' class='location-photo' />"
     }
-    let button = "<button class='btn btn-outline-primary add-to-tour' id='add-to-yourtour' onclick='addLocation("+locations[i]['id']+")'>Add to your tour</button>";
+    let button = "<button class='btn btn-primary add-to-tour' id='add-to-yourtour' onclick='addLocation("+locations[i]['id']+")'>Add to your tour</button>";
     let currentlocation;
 
      var markercontent = "<h3>" + locations[i]['title'] +  "</h3>";   
@@ -274,7 +282,7 @@ function deleteMarkers() {
 
 
 function openPrintModal(){
-  var tourcontent = document.getElementById('tourcontent').innerHTML;
- document.getElementById('printcontent').innerHTML = tourcontent; 
+  var tourcontent = document.getElementById('direction-panel').innerHTML;
+ document.getElementById('direction-panel-modal').innerHTML = tourcontent; 
   document.getElementById('printModal').style.display='block';
 }

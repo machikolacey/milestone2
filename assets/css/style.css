@@ -1,8 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Noto+Sans+JP:wght@100;300;400;500;700&family=Oswald:wght@200;300;400;500;600;700&display=swap');
 
+.container{
+  max-width:1480px;
+}
+
 body, html{
   font-family:'Montserrat', 'Oswald',sans-serif;
+  background: #c2b9b0;
+  color:#7e685a;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c2b9b0+4,c2b9b0+4,e5ddd0+18,e5ddd0+50,c2b9b0+100 */
+background: #c2b9b0; /* Old browsers */
+background: -moz-linear-gradient(top,  #c2b9b0 4%, #c2b9b0 4%, #e5ddd0 18%, #e5ddd0 50%, #c2b9b0 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #c2b9b0 4%,#c2b9b0 4%,#e5ddd0 18%,#e5ddd0 50%,#c2b9b0 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #c2b9b0 4%,#c2b9b0 4%,#e5ddd0 18%,#e5ddd0 50%,#c2b9b0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2b9b0', endColorstr='#c2b9b0',GradientType=0 ); /* IE6-9 */
+
 }
+
+
+header{
+  background: #c2cad0;
+  padding: 10px 20px;
+  color:#afd275;
+  background: #afd275;
+  padding: 10px 20px;
+  color: #7e685a;
+}
+
+
+.gm-style .gm-style-iw-c {
+
+  background-color: #c2cad0;
+
+}
+
+#tourcontent{
+
+  padding:20px;
+}
+
+.right-panel{
+
+}  background:#c2cad0;
+
 .btn-primary {
   background-color: #ea5e98;
   border-color: #ea5e98;
@@ -20,8 +60,10 @@ body, html{
 }
 
 #printModal .btn{display:none !important;}
-
+/*
 #direction-panel{display:none;}
+#printModal #direction-panel{display:block;}
+*/
 .map-icon-label .map-icon {
 	font-size: 14px;
 	color: #FFFFFF;
@@ -31,10 +73,6 @@ body, html{
 }
 
 
-dl, ol, ul {
-    margin: 0;
-    padding: 0;
-}
 
 dl li, ol li, ul li{
     padding:0;

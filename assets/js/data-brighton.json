@@ -21,7 +21,7 @@
             "website":"https://brightonmuseums.org.uk/royalpavilion/",
             "address": "4/5 Pavilion Buildings, Brighton", 
             "postcode" :  "BN1 1EE",
-            "youtube": "",
+            "photo": "photo-clock-tower.jpg",
             "category": 1
           },
 
@@ -81,6 +81,7 @@
             "description":"Family run café serving traditional English breakfasts, bruch and snacks & drinks at affordable prices. All food 'home' cooked on the premises and a 'create your own' breakfast is also available with prices from 50 pence.",
             "website":"https://www.piggies.cafe/",
             "address": "85 St James's Street, Brighton", 
+            "photo" : "photo-little-miss-piggies.jpg",
             "postcode" :  "BN2 1TP",
             "category": 2
           },
@@ -93,6 +94,7 @@
             "website":"https://www.facebook.com/wheatandbeans",
             "address": "117 St. James's Street, Brighton", 
             "postcode" :  "BN2 1TH",
+            "photo" : "photo-wheat-and-beans.jpg",
             "category": 2
           },
           {
@@ -126,6 +128,7 @@
             "description":"Small, probably the smallest tea room in Brighton. Traditional English design, vintage table settings. Serving homemade cakes, freshly made sandwiches, Leman style breakfasts, Cream and Afternoon Teas, wide selection of teas as well as coffees and other soft drinks.",
             "website":"https://leman-tea-room.business.site/",
             "address": "15A Madeira Place, Brighton", 
+            "photo" : "photo-leman-tea-room.jpg",
             "postcode" :  "BN2 1TN",
             "category": 2
           },

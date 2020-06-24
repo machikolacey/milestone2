@@ -5,6 +5,9 @@ var totaldistance=0, totalduration=0, totalcalories=0;
 let orglocations = [];
 let currentcategory = 0;
 var markers = [];
+const isSmall = window.screen.width <768;
+
+
   fetch("./assets/js/data-brighton.json", {
       headers : { 
         'Content-Type': 'application/json',
@@ -19,26 +22,21 @@ var markers = [];
     for (var i = 0; i < locations.length; i++) {
       locations[i]["id"] = i;
     }
-    currentcategory=1;
-  filterCategory(currentcategory);
-  
+    //currentcategory=1;
+    //filterCategory(currentcategory);
+    currentcategory = 0;
+    initialize();
   });
-
-
-  var markerIcon = {
-    url: 'assets/images/mapicons/marker-pink-map-mountain.png',
-    scaledSize: new google.maps.Size(30, 30),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(42,65)
-  };
-
-var infowindow;
-var map;
 
 
   function initialize() {
     let zoom = 14;let lat =0; let lng = 0;
     switch(currentcategory){
+      case 0 :
+        zoom = 11;
+        lat = 50.824873;
+        lng = -0.126048;
+      break;
       case 1 :
       zoom = 13;
       lat = 50.824873;
@@ -67,6 +65,44 @@ var map;
 
   }
  
+
+
+  function filterCategory(category){
+    // doument.getElementsByClassName('category').removeClass('active');
+   currentcategory = category;
+   locations = orglocations.filter( i => i.category == category );
+   //document.getElementById('category'+category).addClass('active');
+   console.log(locations);
+   initialize();
+   }
+   
+
+  var markerIcon = {
+    url: 'assets/images/mapicons/forest.png',
+    scaledSize: new google.maps.Size(30, 30),
+    origin: new google.maps.Point(0, 0),
+    anchor: new google.maps.Point(42,65)
+  };
+
+  var markerIconCafe = {
+    url: 'assets/images/mapicons/cafe-pink.png',
+    scaledSize: new google.maps.Size(30, 30),
+    origin: new google.maps.Point(0, 0),
+    anchor: new google.maps.Point(42,65)
+  };
+
+  var markerIconAttraction = {
+    url: 'assets/images/mapicons/attraction.png',
+    scaledSize: new google.maps.Size(30, 30),
+    origin: new google.maps.Point(0, 0),
+    anchor: new google.maps.Point(42,65)
+  };
+
+var infowindow;
+var map;
+
+
+  
 
 function updateTour(){
 let text = yourtourids.map((item) => {
@@ -129,14 +165,6 @@ function resetDistance(){
 }
 
 
-function filterCategory(category){
- // doument.getElementsByClassName('category').removeClass('active');
-currentcategory = category;
-locations = orglocations.filter( i => i.category == category );
-//document.getElementById('category'+category).addClass('active');
-console.log(locations);
-initialize();
-}
 
 function checkDistance(){
 console.log('check distance');
@@ -213,7 +241,7 @@ function setMarkers(map,locations){
     let embed   = "";
     let photo = "";
 
-    if(locations[i]['youtube'] != undefined){    
+    if(locations[i]['youtube'] != undefined   && !isSmall){    
         embed = "<iframe width='100%' height='200' src='https://www.youtube.com/embed/"+locations[i]['youtube']+"' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
     }
     if(locations[i]['youtube'] == undefined && locations[i]['photo'] != undefined){    
@@ -228,15 +256,27 @@ function setMarkers(map,locations){
        "</h3><div class='row'><div class='col-sm-6'>"+
        photo + embed 
        + "</div><div class='col-sm-6'>"
-        + locations[i]['description'] + button + "</div></div>"  ;   
+        + locations[i]['description'] + button + "</div></div>"  ;
 
+
+
+          let icon = markerIcon;            
+          switch(locations[i]['category']){
+          case 2:
+            icon = markerIconCafe;   
+          break;
+          case 1:
+            icon = markerIconAttraction;
+          break;
+
+          }
     latlngset = new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']);
 
              var marker = new google.maps.Marker({  
                    id:id,  map: map,
                     title: locations[i]['title'],
                      position: latlngset  , 
-                     icon: markerIcon,
+                     icon: icon,
                      
                     /*   label: {
                         fontSize: "10pt",
@@ -257,7 +297,9 @@ function setMarkers(map,locations){
                                 infowindow.close();
                             }
 
-                        infowindow = new google.maps.InfoWindow();
+                        infowindow = new google.maps.InfoWindow({
+                           minWidth:310
+                        });
                         infowindow.setContent(marker.content);
                         infowindow.open(map,marker);
                       //  document.getElementById("factdiv").innerHTML =  marker.content; 

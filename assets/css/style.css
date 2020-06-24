@@ -58,6 +58,24 @@ header{
   padding: 2px;
   padding-bottom:125px;
 }
+.btn-primary{display:inline-block;
+  background-color: #e7717d;
+  border-color: #e7717d;
+}
+
+.btn-secondary{display:inline-block;
+  background-color: #afd275;
+  border-color: #afd275;
+}
+.btn-danger {
+  color: #fff;
+  background-color: #afd275;
+  border-color: #afd275;
+}
+
+.categories{
+  margin: 20px 0 20px 0;
+}
 
 #printModal .btn{display:none !important;}
 /*
@@ -151,4 +169,12 @@ iframe{
     cursor: pointer;
   }
 
-  
+  .fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 30px;
+}

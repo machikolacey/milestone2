@@ -194,7 +194,7 @@ var directionsService = new google.maps.DirectionsService();
           //     directionsRenderer.setPanel(document.getElementById('direction-panel-modal'));
      //     var textnode = document.createTextNode('<button onclick="openPrintModal()" class="btn btn-primary" id="check-directions">Check Directions</button>');         // Create a text node
         var text =   "<button id='check-directions' class='btn btn-primary' onclick='openPrintModal()'>Check Distance</button>";
-          document.getElementById('yourtour-panel').appendChild(text); 
+        //  document.getElementById('yourtour-panel').appendChild(text); 
               } else {
                 window.alert('Directions request failed due to ' + status);
               }

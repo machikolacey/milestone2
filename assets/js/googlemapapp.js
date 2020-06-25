@@ -127,7 +127,6 @@ let text1 = "<h2>Your Tour</h2><ol>"+text+"</ol> ";
  if(yourtourids.length > 1){
   let e = document.createElement('div');
   text2  = "<button id='check-distance' class='btn btn-secondary' onclick='checkDistance()'>Check Distance</button>";
-  text2 += "<button id='check-distance' class='btn btn-secondary' onclick='resetDistance()'>Reset Distance Map</button>";
  }
 
  document.getElementById("yourtour").innerHTML =  text1 + text2; 
@@ -163,6 +162,15 @@ function addLocation(id){
 
 }
 
+function resetTour(){
+   yourtourids = [];
+  // updateTour();
+  // resetDistance();
+   initialize();
+   document.getElementById("yourtour-panel").style.display="none";
+   document.getElementById("tourcontent").style.display="none";
+   document.getElementById("resetpanels").style.display="none";
+}
 
 function removeLocation(id){
   if(yourtourids.includes(id)){
@@ -193,6 +201,8 @@ var service = new google.maps.DistanceMatrixService();
 yourtourids.forEach(distancCalculator);
  document.getElementById("check-distance").style.display="block";
  document.getElementById("yourtour-panel").style.display = "block";
+ document.getElementById("resetpanels").style.display = "block";
+ 
 }
 
 function distancCalculator(id, key){

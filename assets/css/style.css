@@ -26,7 +26,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2b9b0', end
 #tourcontent, #yourtour-panel, #destination-details-mobile{
   display:none;
 }
-
+#resetpanels{
+  display:none;
+}
 #totaldistance, #totalduration, #totalcalories{
   font-size:2rem;
   font-weight:700;
@@ -214,7 +216,9 @@ iframe{
   #default{
     height:300px !important;
   }
-
+  .categories {
+    display:none;
+  }
 }
 
 @media screen and (max-width:400px){

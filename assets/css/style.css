@@ -18,6 +18,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2b9b0', end
 }
 
 
+#tourcontent, #yourtour-panel, #destination-details-mobile{
+  display:none;
+}
+
 header{
   background: #c2cad0;
   padding: 10px 20px;
@@ -80,9 +84,9 @@ header{
 .categories{
   margin: 20px 0 20px 0;
 }
-
-#printModal .btn{display:none !important;}
 /*
+#printModal .btn{display:none !important;}
+
 #direction-panel{display:none;}
 #printModal #direction-panel{display:block;}
 */

@@ -46,9 +46,9 @@ function checkBrowserSize(){
     let zoom = 14;let lat =0; let lng = 0;
     switch(currentcategory){
       case 0 :
-        zoom = 11;
-        lat = 50.824873;
-        lng = -0.126048;
+        zoom = 14;
+        lat = 50.827317; 
+        lng = -0.133693;
       break;
       case 1 :
       zoom = 13;

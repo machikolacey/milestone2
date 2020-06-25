@@ -205,18 +205,6 @@
             "postcode" :  "BN2 1TW",
             "youtube" : "v6OesrM82yc",
             "category": 1
-          },
-          {
-            "title": "Brighton Marina",
-            "shortitle" : "Marina",
-            "lat":50.812676, 
-            "lng": -0.098585,
-            "website" : "https://www.brightonmarina.co.uk/",
-            "description":"Brighton Marina centres on the busy yacht harbour, where sailboats moor at the quay. It’s a chic shopping hub with fashion boutiques, galleries, and craft shops, plus casual eateries with terraces overlooking the water.",
-            "address": "The Waterfront Brighton Marina", 
-            "postcode" :  "BN25WA",
-            "youtube" : "v5Z00kMh9DI",
-            "category": 1
           }
          
 

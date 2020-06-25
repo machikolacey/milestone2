@@ -17,7 +17,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2b9b0', end
 
 }
 .w3-container, .w3-panel {
-  padding: 16px !important;
+  padding: 10px 16px 0 16px ;
 }
 
 .row img{
@@ -89,9 +89,15 @@ header{
   background-color: #afd275;
   border-color: #afd275;
 }
-
-.categories{
+.map-wrapper{
+  position:relative;
+}
+.categories {
   margin: 20px 0 20px 0;
+  position: absolute;
+  top: 40px;
+  left:20px;
+  z-index: 2;
 }
 /*
 #printModal .btn{display:none !important;}
@@ -132,8 +138,16 @@ iframe{
     direction: ltr;
     max-height: 300px;
     overflow-y: scroll;
+    padding: 20px 0;
+}
+#direction-panel-modal{
+  padding: 20px 0;
 }
 
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+  margin-right: 10px;
+}
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

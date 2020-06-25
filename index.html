@@ -15,49 +15,56 @@
 <body onload="checkBrowserSize()">
   <header><h2 id="logo"><i class="fa fa-map-marker" aria-hidden="true"></i>Brighton walking tour planner</h2></header>
 <div class="container">
-<h2>Please click on a marker to see the details of the location.</h2>
-<div class="categories">
-<button class="btn btn-primary category" id="category1" onclick="filterCategory(2)">Cafes</button>
-<button class="btn btn-primary category" id="category2"  onclick="filterCategory(1)">Tourist Attractions</button>
-<button class="btn btn-primary category" id="category3" onclick="filterCategory(3)">Parks</button>
+<p>Please click on a marker to see the details of the location.</p>
+<div id="tourcontent" class="right-panel">
+  <div id="yourtour" class="yourtour"></div>
 </div>
+<div id="yourtour-panel" class="right-panel">
+  <div id="totaldistance" class="totaldistance"></div>
+  <div id="totalduration" class="totalduration"></div>
+  <div id="totalcalories" class="totalcalories"></div>
+
+</div>
+
+
 <div id="destination-details-mobile" class="right-panel"></div>
 <div class="row">
-  <div class="col-lg-8 col-sm-12"><div id="default" style="width:100%; height:550px"></div></div>
-  <div class="col-lg-4 col-sm-12">
-    <div id="tourcontent" class="right-panel">
-      <div id="yourtour" class="yourtour"></div>
-    </div>
-    <div id="yourtour-panel" class="right-panel">
-      <div id="totaldistance" class="totaldistance"></div>
-      <div id="totalduration" class="totalduration"></div>
-      <div id="totalcalories" class="totalcalories"></div>
+  <div class="col-sm-12">
 
-    </div>
- 
-    <div id="printModal" class="w3-modal">
-      <div class="w3-modal-content w3-animate-top w3-card-4">
-        <header class="w3-container"> 
-          <span onclick="document.getElementById('printModal').style.display='none'" 
-          class="w3-button w3-display-topright">&times;</span>
-          <h3 id="yourtourtitle-modal"></h3>
-        </header>
-        <div class="w3-container" id="printcontent">
-          <div id="yourtour-modal" class="yourtour"></div>
-          <div id="totaldistance-modal" class="totaldistance"></div>
-          <div id="totalduration-modal" class="totalduration"></div>
-          <div id="totalcalories-modal" class="totalcalories"></div>
-          <div id="direction-panel-modal" class="direction-panel"></div>
-          
-        </div>
-      </div>
+<div class="map-wrapper">
+    <div class="categories">
+      <button class="btn btn-primary category" id="category1" onclick="filterCategory(2)">Cafes</button>
+      <button class="btn btn-primary category" id="category2"  onclick="filterCategory(1)">Tourist Attractions</button>
+      <button class="btn btn-primary category" id="category3" onclick="filterCategory(3)">Parks</button>
     </div>
 
-  </div>
+    <div id="default" style="width:100%; height:550px"></div>
+</div>
+</div>
+
+   
+
+  
 </div>
 <!--<div id="direction-panel" class="direction-panel"></div>-->
 </div>
-
+<div id="printModal" class="w3-modal">
+  <div class="w3-modal-content w3-animate-top w3-card-4">
+    <header class="w3-container"> 
+      <span onclick="document.getElementById('printModal').style.display='none'" 
+      class="w3-button w3-display-topright">&times;</span>
+      <h3 id="yourtourtitle-modal"></h3>
+    </header>
+    <div class="w3-container" id="printcontent">
+      <div id="yourtour-modal" class="yourtour"></div>
+      <div id="totaldistance-modal" class="totaldistance"></div>
+      <div id="totalduration-modal" class="totalduration"></div>
+      <div id="totalcalories-modal" class="totalcalories"></div>
+      <div id="direction-panel-modal" class="direction-panel"></div>
+      
+    </div>
+  </div>
+</div>
 
 <footer>
 

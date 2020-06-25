@@ -126,8 +126,8 @@ let text1 = "<h2>Your Tour</h2><ol>"+text+"</ol> ";
 
  if(yourtourids.length > 1){
   let e = document.createElement('div');
-  text2  = "<button id='check-distance' class='btn btn-primary' onclick='checkDistance()'>Check Distance</button>";
-  text2 += "<button id='check-distance' class='btn btn-primary' onclick='resetDistance()'>Reset Distance Map</button>";
+  text2  = "<button id='check-distance' class='btn btn-secondary' onclick='checkDistance()'>Check Distance</button>";
+  text2 += "<button id='check-distance' class='btn btn-secondary' onclick='resetDistance()'>Reset Distance Map</button>";
  }
 
  document.getElementById("yourtour").innerHTML =  text1 + text2; 
@@ -151,14 +151,16 @@ function updateTourNoButtons(){
 
 function addLocation(id){
 
-    if(!yourtourids.includes(id)){
-      yourtourids.push(id);
-      document.getElementById("add-to-yourtour").disabled = true;
-    }else{
-      alert("You've already added this place to your tour.");
-    }
+      if(!yourtourids.includes(id)){
+        yourtourids.push(id);
+        document.getElementById("add-to-yourtour").disabled = true;
+      }else{
+        alert("You've already added this place to your tour.");
+      }
 
    updateTour();
+  document.getElementById("printModal").style.display="none";
+
 }
 
 
@@ -239,7 +241,7 @@ var directionsService = new google.maps.DirectionsService();
                 directionsRenderer.setMap(map);
                 directionsRenderer.setPanel(document.getElementById('direction-panel-modal'));
           //     directionsRenderer.setPanel(document.getElementById('direction-panel-modal'));
-     //     var textnode = document.createTextNode('<button onclick="openPrintModal()" class="btn btn-primary" id="check-directions">Check Directions</button>');         // Create a text node
+          //     var textnode = document.createTextNode('<button onclick="openPrintModal()" class="btn btn-primary" id="check-directions">Check Directions</button>');         // Create a text node
         var text =   "<button id='check-directions' class='btn btn-primary' onclick='openPrintModal()'>Check Distance</button>";
         //  document.getElementById('yourtour-panel').appendChild(text); 
               } else {
@@ -256,7 +258,7 @@ function setMarkers(map,locations){
 
 
     let location = locations [i]
-    let id      = i
+    let id      = 0;
     let embed   = "";
     let photo = "";
 
@@ -270,14 +272,9 @@ function setMarkers(map,locations){
     let currentlocation;
 
      var markercontent = "<h3>" + locations[i]['title'] +  "</h3>";   
-      content = 
-     "<h3>" + locations[i]['title'] + 
-       "</h3><div class='row'><div class='col-sm-6'>"+
-       photo + embed 
-       + "</div><div class='col-sm-6'>"
+     var title =  locations[i]['title'] ;
+         content = "</h3><div class='row'><div class='col-sm-6'>"+photo + embed + "</div><div class='col-sm-6'>"
         + locations[i]['description'] + button + "</div></div>"  ;
-
-
 
           let icon = markerIcon;            
           switch(locations[i]['category']){
@@ -292,17 +289,11 @@ function setMarkers(map,locations){
     latlngset = new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']);
 
            var marker = new google.maps.Marker({  
-                   id:id,  map: map,
+                   id:locations[i]['id'],  
+                   map: map,
                     title: locations[i]['title'],
                      position: latlngset  , 
                      icon: icon,
-                     
-                    /*   label: {
-                        fontSize: "10pt",
-                        labelClass: "maplabel", 
-                        fontWeight:"700",
-                        text:  locations[i]['shortitle']
-                       }, */
                      content:content,
                      optimized: false
             });
@@ -311,14 +302,21 @@ function setMarkers(map,locations){
      
            // if(!isSmall){
 
-            google.maps.event.addListener(marker,'click', (function(marker,markercontent, position, content){ 
+            google.maps.event.addListener(marker,'click', (function(marker,markercontent, position, content, title, id){ 
                 return function() {
-                       if (infowindow)
-                            {
-                                infowindow.close();
-                            }
+                      console.log('id='+marker.id);
                             document.getElementById('direction-panel-modal').innerHTML = marker.content; 
+                            document.getElementById('yourtourtitle-modal').innerHTML = marker.title; 
+                            if(yourtourids.includes(marker.id)){
+                                document.getElementById('add-to-yourtour').disabled=true;
+                                document.getElementById('add-to-yourtour').innerHTML="You've already added this!";
+                                
+                            }
+
                             document.getElementById('printModal').style.display='block';
+                           
+
+
                       //if(!isSmall){      
                         /*
                         infowindow = new google.maps.InfoWindow({
@@ -328,7 +326,7 @@ function setMarkers(map,locations){
                         infowindow.open(map,marker);
                         */
                     //  } else{
-                        console.log('clicked');
+                      
                       
                   
                          

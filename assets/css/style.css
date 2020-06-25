@@ -16,12 +16,21 @@ background: linear-gradient(to bottom,  #c2b9b0 4%,#c2b9b0 4%,#e5ddd0 18%,#e5ddd
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2b9b0', endColorstr='#c2b9b0',GradientType=0 ); /* IE6-9 */
 
 }
+.w3-container, .w3-panel {
+  padding: 16px !important;
+}
 
-
+.row img{
+  max-width:100%;
+}
 #tourcontent, #yourtour-panel, #destination-details-mobile{
   display:none;
 }
 
+#totaldistance, #totalduration, #totalcalories{
+  font-size:2rem;
+  font-weight:700;
+}
 header{
   background: #c2cad0;
   padding: 10px 20px;

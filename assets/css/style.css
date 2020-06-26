@@ -23,11 +23,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2b9b0', end
 .row img{
   max-width:100%;
 }
-#tourcontent, #yourtour-panel, #destination-details-mobile{
+ #yourtour-panel, #destination-details-mobile{
   display:none;
 }
 #resetpanels{
   display:none;
+  margin: 0 0 20px 0;
 }
 #totaldistance, #totalduration, #totalcalories{
   font-size:2rem;
@@ -50,16 +51,13 @@ header{
 
  }
 
-#tourcontent{
-
-}
 
 .right-panel{
   background-color: #e7717d;
   color: #fff;
   padding: 10px;
   border-radius:5px;
-  margin-bottom:20px;
+  margin:20px 0;
 }  
 
 .btn-primary {
@@ -91,6 +89,18 @@ header{
   background-color: #afd275;
   border-color: #afd275;
 }
+.btn-danger:hover, .btn-danger:hover, .btn-secondary:hover {
+  color: #fff;
+  background-color: #89b5bd;
+  border-color: #89b5bd;
+}
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #89b5bd;
+  border-color: #89b5bd;
+}
+
+
 .map-wrapper{
   position:relative;
 }
@@ -107,6 +117,11 @@ header{
 #direction-panel{display:none;}
 #printModal #direction-panel{display:block;}
 */
+
+.modalButtons{
+  margin:0 0 20px 0;
+}
+
 .map-icon-label .map-icon {
 	font-size: 14px;
 	color: #FFFFFF;
@@ -145,10 +160,13 @@ iframe{
 #direction-panel-modal{
   padding: 20px 0;
 }
+#tourlist li {
+  margin:10px 0;
+}
 
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
-  margin-right: 10px;
+  margin: 0 10px;
 }
 /* The Modal (background) */
 .modal {

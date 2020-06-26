@@ -4,19 +4,26 @@
 <script type="text/javascript"  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxC5b3wNV-jG0q82g355HOZ3ucc8q9igw&sensor=false"></script>
 <script type="text/javascript" src="assets/js/googlemapapp.js"></script>
 <script type="text/javascript" src="assets/js/map-icons.min.js"></script>
+
+<script type="text/javascript" src="assets/js/Sortable.min.js"></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
 <link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="assets/css/dragula.min.css">
+
 <title>Brighton Walking Tour Planner</title>
 </head>
 <body onload="checkBrowserSize()">
   <header><h2 id="logo"><i class="fa fa-map-marker" aria-hidden="true"></i>Brighton walking tour planner</h2></header>
 <div class="container">
-<p>Please click on a marker to see the details of the location.</p>
+
 <div id="tourcontent" class="right-panel">
+  <h2>Your Tour</h2>
+  <p>Please click on a marker to see the details of the location.</p>
   <div id="yourtour" class="yourtour"></div>
 </div>
 <div id="yourtour-panel" class="right-panel">
@@ -26,7 +33,7 @@
 
 </div>
 <div id="resetpanels">
-  <button id="reset-tour" class="btn btn-primary d-inline-block" onclick="resetTour()">Reset Tour</button>
+
   <button id='check-distance' class='btn btn-secondary d-inline-block' onclick='resetDistance()'>Reset Map</button>
 </div>
 
@@ -39,6 +46,7 @@
       <button class="btn btn-primary category" id="category1" onclick="filterCategory(2)">Cafes</button>
       <button class="btn btn-primary category" id="category2"  onclick="filterCategory(1)">Tourist Attractions</button>
       <button class="btn btn-primary category" id="category3" onclick="filterCategory(3)">Parks</button>
+      <button class="btn btn-primary category" id="category0" onclick="filterCategory(0)">All</button>
     </div>
 
     <div id="default" style="width:100%; height:550px"></div>
@@ -54,7 +62,7 @@
 <div id="printModal" class="w3-modal">
   <div class="w3-modal-content w3-animate-top w3-card-4">
     <header class="w3-container"> 
-      <span onclick="document.getElementById('printModal').style.display='none'" 
+      <span onclick="document.getElementById('direction-panel-modal').innerHTML = '';document.getElementById('printModal').style.display='none'" 
       class="w3-button w3-display-topright">&times;</span>
       <h3 id="yourtourtitle-modal"></h3>
     </header>
@@ -64,10 +72,17 @@
       <div id="totalduration-modal" class="totalduration"></div>
       <div id="totalcalories-modal" class="totalcalories"></div>
       <div id="direction-panel-modal" class="direction-panel"></div>
+      <div class="modalButtons text-right">
+         <div id="addbtn-wrapper" class="d-inline-block"></div> 
+        <div id="closebtn-wrapper" class="d-inline-block"><button class="btn btn-primary" onclick="document.getElementById('direction-panel-modal').innerHTML = '';document.getElementById('printModal').style.display='none'">Close</button></div>
+      </div>
       
     </div>
   </div>
 </div>
+
+
+
 
 <footer>
 

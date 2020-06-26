@@ -105,6 +105,7 @@
             "description":"Amazing home baked cakes and home made meals. Made in Brighton by the Queen cake baker Denise.",
             "website":"http://www.cakesthedifference.co.uk/",
             "address": "142 Mackie Avenue, Brighton", 
+            "photo" : "photo-cakes-the-difference.png",
             "postcode" :  "BN1 8SB",
             "category": 2
           },
@@ -205,6 +206,102 @@
             "postcode" :  "BN2 1TW",
             "youtube" : "v6OesrM82yc",
             "category": 1
+          },
+          {
+            "title": "Redroaster Cafe",
+            "shortitle" : "Redroaster ",
+            "lat":50.821436, 
+            "lng": -0.136092,
+            "website" : "https://www.redroaster.co.uk/",
+            "description":"Redroaster was one of the first specialist coffee houses in the UK when they set up in 2000, still to this day, they are the only certified organic roastery in the south. They roast up their beans every day to ensure they’re serving the freshest coffee. ",
+            "address": "1D St James's St, Kemptown, Brighton", 
+            "postcode" :  "BN2 1RE",
+            "youtube" : "9rvVYBCOTZ4",
+            "category": 2
+          },
+          {
+            "title": "Small Batch Coffee Roasters",
+            "shortitle" : "Small Batch",
+            "lat":50.824711, 
+            "lng": -0.138507, 
+            "website" : "https://www.smallbatchcoffee.co.uk/",
+            "description":"Winner of BRAVO ‘Best Coffee’ for 2 years running, Small Batch Coffee Company take quality coffee very seriously and deliver it with a relaxed, uniquely Brighton edge. The central Brighton branch is located below MyBrighton on Jubilee Street with additional branches across Brighton, Hove.",
+            "address": "17 Jubilee St, Brighton", 
+            "postcode" :  "BN1 1GE",
+            "youtube" : "dLYDAR9jNlE",
+            "category": 2
+          },
+          {
+            "title": "Small Batch Coffee Roasters",
+            "shortitle" : "Small Batch",
+            "lat":50.824711, 
+            "lng": -0.138507, 
+            "website" : "https://www.smallbatchcoffee.co.uk/",
+            "description":"Winner of BRAVO ‘Best Coffee’ for 2 years running, Small Batch Coffee Company take quality coffee very seriously and deliver it with a relaxed, uniquely Brighton edge. The central Brighton branch is located below MyBrighton on Jubilee Street with additional branches across Brighton, Hove.",
+            "address": "17 Jubilee St, Brighton", 
+            "postcode" :  "BN1 1GE",
+            "youtube" : "dLYDAR9jNlE",
+            "category": 2
+          },
+          {
+            "title": "The Flour Pot Bakery",
+            "shortitle" : "Flour Pot",
+            "lat":50.828511, 
+            "lng": -0.137499,
+            "website" : "https://www.theflourpot.co.uk/",
+            "description":"The Flour Pot Bakery grew out of a commitment to all things artisanal and delicious in food. Offering fresh bread and pastries, homemade sandwiches and fantastic Small Batch coffee, these bakers are bringing carbohydrates back with aplomb. All of the Flour Pot Bakery shops stock and sell their own bread. Bread can be ordered in advance (before 3pm) from shops, or for next day collection and cakes can also be pre-ordered.",
+            "address": "40 Sydney St, Brighton", 
+            "postcode" :  "BN1 4EP",
+            "youtube" : "L0vhBGUAeCs",
+            "category": 2
+          },
+          {
+            "title": "Chard",
+            "shortitle" : "Flour Pot",
+            "lat": 50.825748, 
+            "lng": -0.159064,
+            "website" : "https://www.chardrestaurant.uk/",
+            "description":"The exciting new restaurant Chard Brighton offers a chic and welcoming cafe by day which transforms into a romantic restaurant by night boasting a small but carefully crafted fine dining menu of locally-sourced, seasonal ingredients at a charming venue on Western Road. ",
+            "address": "40 Sydney St, Brighton", 
+            "postcode" :  "BN1 4EP",
+            "youtube" : "geGhBuRg4_Q",
+            "category": 2
+          },
+          {
+            "title": "Coppa Club",
+            "shortitle" : "Coppa Club",
+            "lat":  50.822702, 
+            "lng": -0.140576,
+            "website" : "https://coppaclub.co.uk/brighton/",
+            "description":"New kids in town, Coppa Club are open from 8 am to fill all your caffeine related needs. Freshly ground beans make for a mean flat white, and the organic tea list is one to be reckoned with. ",
+            "address": "12-16 Brighton Square, Brighton", 
+            "postcode" :  "BN1 1HD",
+            "photo" : "photo-coppa-club.png",
+            "category": 2
+          },
+          {
+            "title": "Lucky Beach Cafe",
+            "shortitle" : "Lucky Beach",
+            "lat":  50.820327, 
+            "lng": -0.143030,
+            "website" : "http://luckybeach.co.uk/",
+            "description":"New kids in town, Coppa Club are open from 8 am to fill all your caffeine related needs. Freshly ground beans make for a mean flat white, and the organic tea list is one to be reckoned with. ",
+            "address": "Kings Road Arches, 183 Kings Rd, Brighton", 
+            "postcode" :  "BN1 1NB",
+            "photo" : "photo-lucky-beach.jpg",
+            "category": 2
+          },
+          {
+            "title": "Cafe Marmalade",
+            "shortitle" : "Cafe Marmalade",
+            "lat": 50.817914, 
+            "lng": -0.112022, 
+            "website" : "https://www.cafemarmalade.co.uk/",
+            "description":"Whether it’s the delicious Wake Up Smoothie served in a jam jar, a paper-wrapped take-out sandwich for lunch, the platters piled with imaginative salads, very good coffee and sumptuous cakes and scones, Marmalade has become an all-day Kemptown institution for school-runners, hospital staff, dog and toddler walkers and locally-based creatives. ",
+            "address": "238 Eastern Rd, Kemptown, Brighton", 
+            "postcode" :  "BN2 5JJ",
+            "photo" : "photo-cafe-marmalade.jpg",
+            "category": 2
           }
          
 

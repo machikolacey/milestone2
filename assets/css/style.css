@@ -107,7 +107,7 @@ header{
 .categories {
   margin: 20px 0 20px 0;
   position: absolute;
-  top: 40px;
+  bottom: 20px;
   left:20px;
   z-index: 2;
 }

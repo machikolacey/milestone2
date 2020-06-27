@@ -1,24 +1,25 @@
 let yourtour = [];
 let yourtourids = [];
-var locations = [];
-var totaldistance=0, totalduration=0, totalcalories=0;
+let locations = [];
+let totaldistance=0, totalduration=0, totalcalories=0;
 let orglocations = [];
 let currentcategory = 0;
-var markers = [];
+let markers = [];
 let isSmall = false;
-var content = "";
-
+let content = "";
+let infowindow;
+let map;
 
 
 window.addEventListener('resize', checkBrowserSize);
 
-function checkBrowserSize(){
-  console.log('checkBrowserSize');
+  function checkBrowserSize(){
+    console.log('checkBrowserSize');
 
-  if(window.innerWidth < 768){
-    isSmall = true;
+    if(window.innerWidth < 768){
+      isSmall = true;
+    }
   }
-}
 
 
   fetch("./assets/js/data-brighton.json", {
@@ -32,43 +33,22 @@ function checkBrowserSize(){
 
     locations =  orglocations = data;
 
-    for (var i = 0; i < locations.length; i++) {
+    for (let i = 0; i < locations.length; i++) {
       locations[i]["id"] = i;
     }
-    //currentcategory=1;
-    //filterCategory(currentcategory);
+
     currentcategory = 0;
+    currentcat = "all";
     initialize();
   });
 
 
-  function initialize() {
+function initialize() {
     let zoom = 14;let lat =0; let lng = 0;
-    switch(currentcategory){
-      case 0 :
-      zoom = 13;
-      lat = 50.852922;
-      lng = -0.153737;
-      break;
-      case 1 :
-      zoom = 14;
-      lat = 50.824873;
-      lng = -0.126048;
-      break;
-      case 2 :
-      zoom = 13;
-      lat = 50.852922;
-      lng = -0.153737;
-      break;
-      case 3:
-      zoom = 14;
-      lat = 50.842827;
-      lng = -0.148028;
-      break;
-    }
-    var myOptions = {
-      center: new google.maps.LatLng(lat, lng),
-      zoom: zoom,
+ 
+    let myOptions = {
+      center: new google.maps.LatLng(categories[currentcategory]['lat'], categories[currentcategory]['lng']),
+      zoom: categories[currentcategory]['zoom'],
       mapTypeId: google.maps.MapTypeId.ROADMAP
 
     };
@@ -80,8 +60,8 @@ function checkBrowserSize(){
  
 
 
-  function filterCategory(category){
-    // doument.getElementsByClassName('category').removeClass('active');
+function filterCategory(category){
+
    currentcategory = category;
    
    if(category == 0){
@@ -89,68 +69,131 @@ function checkBrowserSize(){
    }else{
     locations = orglocations.filter( i => i.category == category );
    }
-   //document.getElementById('category'+category).addClass('active');
+ 
    console.log(locations);
    initialize();
-   }
+
+}
    
+function setMarkers(map,locations){
 
-  var markerIcon = {
-    url: 'assets/images/mapicons/forest.png',
-    scaledSize: new google.maps.Size(30, 30),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(42,65)
-  };
+  let marker, i
 
-  var markerIconCafe = {
-    url: 'assets/images/mapicons/cafe-pink.png',
-    scaledSize: new google.maps.Size(30, 30),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(42,65)
-  };
+    for (i = 0; i < locations.length; i++)
+    {  
+          let location = locations [i]
+          let id      = 0;
+          let embed   = "";
+          let photo = "";
 
-  var markerIconAttraction = {
-    url: 'assets/images/mapicons/attraction.png',
-    scaledSize: new google.maps.Size(30, 30),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(42,65)
-  };
+          if(locations[i]['youtube'] != undefined ){    
+              embed = "<iframe width='100%' height='280' src='https://www.youtube.com/embed/"+locations[i]['youtube']+"' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
+          }
+          if(locations[i]['youtube'] == undefined && locations[i]['photo'] != undefined){    
+            photo = "<img src='assets/images/"+locations[i]['photo']+"' alt='"+locations[i]['title']+"' class='location-photo' />"
+          }
+          let button = "<button class='btn btn-primary add-to-tour d-inline-block' id='add-to-yourtour' onclick='addLocation("+locations[i]['id']+")'>Add to your tour</button>";
+          let currentlocation;
 
-var infowindow;
-var map;
+          let markercontent = "<h3>" + locations[i]['title'] +  "</h3>";   
+          let title =  locations[i]['title'] ;
+              content = "</h3><div class='row'><div class='col-sm-6'>"+photo + embed + "</div><div class='col-sm-6'>"
+              + locations[i]['description']  + "</div></div>"  ;
 
+          latlngset = new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']);
+          let catdata = categories[locations[i]['category']];
+          let markerIcon = {
+            url: catdata['markerIcon'],
+            scaledSize: new google.maps.Size(catdata['scaledSizeWidth'], catdata['scaledSizeHeight']),
+            origin: new google.maps.Point(catdata['originX'], catdata['originY']),
+            anchor: new google.maps.Point(catdata['anchorX'], catdata['anchorY'])
+          };
+          let marker = new google.maps.Marker({  
+                  id:locations[i]['id'],  
+                  map: map,
+                    title: locations[i]['title'],
+                    position: latlngset  , 
+                    icon: markerIcon,
+                    content:content,
+                    button:button,
+                    optimized: false
+            });
+            markers.push(marker);
+            map.setCenter(marker.getPosition())
 
-  
+            google.maps.event.addListener(marker,'click', (function(marker,markercontent, position, content, title, id){ 
+            return function() {
+                  console.log('id='+marker.id);
+                  document.getElementById('direction-panel-modal').innerHTML = marker.content; 
+                  document.getElementById('yourtourtitle-modal').innerHTML = marker.title; 
+                  document.getElementById('addbtn-wrapper').innerHTML = marker.button; 
+                  if(yourtourids.includes(marker.id)){
+                      document.getElementById('add-to-yourtour').disabled=true;
+                      document.getElementById('add-to-yourtour').innerHTML="You've already added this!";     
+                  }
+                 document.getElementById('printModal').style.display='block';
+                  currentlocation = marker.id;
+                 };
+                })(marker,markercontent,infowindow)); 
+    } 
+}
 
 function updateTour(){
-let text = yourtourids.map((item) => {
-  return '<li>'+orglocations[item]["title"] + "<button class='btn btn-danger btn-sm remove-from-tour' destid='"+orglocations[item]["id"]+"' onclick='removeLocation("+item+")'>Remove</button> </li>";
-}).join(' ');
-let text1 = "<ol id='tourlist'>"+text+"</ol> ";
- let text2 = "";
+    let text = yourtourids.map((item) => {
+      return '<li>'+orglocations[item]["title"] + "<button class='btn btn-danger btn-sm remove-from-tour' destid='"+orglocations[item]["id"]+"' onclick='removeLocation("+item+")'>Remove</button> </li>";
+    }).join(' ');
 
- if(yourtourids.length > 1){
-  let e = document.createElement('div');
-  text2  = "<button id='check-distance' class='btn btn-secondary d-inline-block' onclick='checkDistance()'>Check Distance</button>";
-  text2 += "  <button id='reset-tour' class='btn btn-secondary d-inline-block' onclick='resetTour()'>Reset Tour</button>";
- }
+    let text1 = "<ol id='tourlist'>"+text+"</ol> ";
+    let text2 = "";
 
- document.getElementById("yourtour").innerHTML =  text1 + text2; 
- //document.getElementById("tourcontent").style.display = "block";
- 
+    if(yourtourids.length > 1){
+      let e = document.createElement('div');
+      text2  = "<button id='check-distance' class='btn btn-secondary d-inline-block' onclick='checkDistance()'>Check Distance</button>";
+      text2 += "  <button id='reset-tour' class='btn btn-secondary d-inline-block' onclick='resetTour()'>Reset Tour</button>";
+    }
+
+    document.getElementById("yourtour").innerHTML =  text1 + text2; 
 }
-/*
-function updateTourNoButtons(){
-  let text = yourtourids.map((item) => {
-    return '<li>'+orglocations[item]["title"] + "</li>";
-  }).join(' ');
-  let text1 = "<h2>Your Tour</h2><ol>"+text+"</ol> ";
-  let text2 = "";
-  
-   document.getElementById("yourtour-modal").innerHTML =  text1 + text2; 
-  
+
+function distancCalculator(id, key){  
+  let nextid = yourtourids[key+1];
+  if(nextid!=undefined){
+    let origin = new google.maps.LatLng(orglocations[id]['lat'], orglocations[id]['lng']);
+    let destination = new google.maps.LatLng(orglocations[nextid]['lat'], orglocations[nextid]['lng']);
+    calculateAndDisplayRoute( origin, destination);
   }
-  */
+}
+
+function calculateAndDisplayRoute(origin, destination) {   
+  let directionsService = new google.maps.DirectionsService();
+  let directionsRenderer = new google.maps.DirectionsRenderer();
+ deleteMarkers();
+  directionsService.route(
+      {
+        origin: origin,
+        destination: destination,
+        travelMode: 'WALKING'
+      },
+      function(response, status) {
+        let routeinfo = response.routes[0].legs[0];
+      totaldistance +=  routeinfo.distance.value;
+      totalduration += routeinfo.duration.value;
+      let totalmiutes = Math.round( totalduration/60 );
+      console.log(routeinfo.distance.text);
+      console.log(routeinfo.duration.text);
+      document.getElementById("totaldistance").innerHTML = "Total distance ="+ Math.round( totaldistance/1000 ) + "KM"; 
+      document.getElementById("totalduration").innerHTML ="Total duration ="+ totalmiutes + "MINUTES";     
+      document.getElementById("totalcalories").innerHTML = "Calories consumed = " + Math.round(totalmiutes*10)+"kcal";
+
+      if (status === 'OK') {
+          directionsRenderer.setDirections(response);
+          directionsRenderer.setMap(map);
+          directionsRenderer.setPanel(document.getElementById('direction-panel-modal'));
+      } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+}
 
 
 
@@ -169,14 +212,7 @@ function addLocation(id){
 
 }
 
-function resetTour(){
-   yourtourids = [];
-  // updateTour();
-  // resetDistance();
-   initialize();
-   document.getElementById("yourtour-panel").style.display="none";
-   document.getElementById("resetpanels").style.display="none";
-}
+
 
 function removeLocation(id){
   if(yourtourids.includes(id)){
@@ -190,7 +226,14 @@ function removeLocation(id){
   }
 }
 
-
+function resetTour(){
+  yourtourids = [];
+ // updateTour();
+ // resetDistance();
+  initialize();
+  document.getElementById("yourtour-panel").style.display="none";
+  document.getElementById("resetpanels").style.display="none";
+}
 function resetDistance(){
   
   initialize();
@@ -203,7 +246,7 @@ function resetDistance(){
 function checkDistance(){
 console.log('check distance');
 console.log(yourtourids);
-var service = new google.maps.DistanceMatrixService();
+let service = new google.maps.DistanceMatrixService();
 yourtourids.forEach(distancCalculator);
  document.getElementById("check-distance").style.display="block";
  document.getElementById("yourtour-panel").style.display = "block";
@@ -211,154 +254,9 @@ yourtourids.forEach(distancCalculator);
  
 }
 
-function distancCalculator(id, key){
-  console.log('distancCalculator');
-  console.log(yourtourids[key+1]);
-  
-  let nextid = yourtourids[key+1];
-  if(nextid!=undefined){
-    var origin = new google.maps.LatLng(orglocations[id]['lat'], orglocations[id]['lng']);
-    var destination = new google.maps.LatLng(orglocations[nextid]['lat'], orglocations[nextid]['lng']);
-    calculateAndDisplayRoute( origin, destination);
-  }
-}
-
-function calculateAndDisplayRoute(origin, destination) {
-  console.log('calculateAndDisplayRoute');
-   
-var directionsService = new google.maps.DirectionsService();
- var directionsRenderer = new google.maps.DirectionsRenderer();
- deleteMarkers();
-        directionsService.route(
-            {
-              origin: origin,
-              destination: destination,
-              travelMode: 'WALKING'
-            },
-            function(response, status) {
-              var routeinfo = response.routes[0].legs[0];
-           totaldistance +=  routeinfo.distance.value;
-         //  totaldistance = totaldistance /1000; //KM
-
-           totalduration += routeinfo.duration.value;
-     //      totalduration = Math.round( totalduration / 60 );// MINUTES
-           let totalmiutes = Math.round( totalduration/60 );
-           console.log(routeinfo.distance.text);
-           console.log(routeinfo.duration.text);
-           document.getElementById("totaldistance").innerHTML = "Total distance ="+ Math.round( totaldistance/1000 ) + "KM"; 
-           document.getElementById("totalduration").innerHTML ="Total duration ="+ totalmiutes + "MINUTES";
-         
-           document.getElementById("totalcalories").innerHTML = "Calories consumed = " + Math.round(totalmiutes*10)+"kcal";
-
-           if (status === 'OK') {
-            
-            console.log(response);
-                directionsRenderer.setDirections(response);
-                directionsRenderer.setMap(map);
-                directionsRenderer.setPanel(document.getElementById('direction-panel-modal'));
-          //     directionsRenderer.setPanel(document.getElementById('direction-panel-modal'));
-          //     var textnode = document.createTextNode('<button onclick="openPrintModal()" class="btn btn-primary" id="check-directions">Check Directions</button>');         // Create a text node
-        var text =   "<button id='check-directions' class='btn btn-primary' onclick='openPrintModal()'>Check Distance</button>";
-        //  document.getElementById('yourtour-panel').appendChild(text); 
-              } else {
-                window.alert('Directions request failed due to ' + status);
-              }
-            });
-}
-function setMarkers(map,locations){
-
-      var marker, i
-
-    for (i = 0; i < locations.length; i++)
-    {  
-
-
-    let location = locations [i]
-    let id      = 0;
-    let embed   = "";
-    let photo = "";
-
-    if(locations[i]['youtube'] != undefined ){    
-        embed = "<iframe width='100%' height='280' src='https://www.youtube.com/embed/"+locations[i]['youtube']+"' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
-    }
-    if(locations[i]['youtube'] == undefined && locations[i]['photo'] != undefined){    
-      photo = "<img src='assets/images/"+locations[i]['photo']+"' alt='"+locations[i]['title']+"' class='location-photo' />"
-    }
-    let button = "<button class='btn btn-primary add-to-tour d-inline-block' id='add-to-yourtour' onclick='addLocation("+locations[i]['id']+")'>Add to your tour</button>";
-    let currentlocation;
-
-     var markercontent = "<h3>" + locations[i]['title'] +  "</h3>";   
-     var title =  locations[i]['title'] ;
-         content = "</h3><div class='row'><div class='col-sm-6'>"+photo + embed + "</div><div class='col-sm-6'>"
-        + locations[i]['description']  + "</div></div>"  ;
-
-          let icon = markerIcon;            
-          switch(locations[i]['category']){
-          case 2:
-            icon = markerIconCafe;   
-          break;
-          case 1:
-            icon = markerIconAttraction;
-          break;
-
-          }
-    latlngset = new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']);
-
-           var marker = new google.maps.Marker({  
-                   id:locations[i]['id'],  
-                   map: map,
-                    title: locations[i]['title'],
-                     position: latlngset  , 
-                     icon: icon,
-                     content:content,
-                     button:button,
-                     optimized: false
-            });
-            markers.push(marker);
-            map.setCenter(marker.getPosition())
-     
-           // if(!isSmall){
-
-            google.maps.event.addListener(marker,'click', (function(marker,markercontent, position, content, title, id){ 
-                return function() {
-                      console.log('id='+marker.id);
-                            document.getElementById('direction-panel-modal').innerHTML = marker.content; 
-                            document.getElementById('yourtourtitle-modal').innerHTML = marker.title; 
-                            document.getElementById('addbtn-wrapper').innerHTML = marker.button; 
-                            if(yourtourids.includes(marker.id)){
-                                document.getElementById('add-to-yourtour').disabled=true;
-                                document.getElementById('add-to-yourtour').innerHTML="You've already added this!";
-                                
-                            }
-
-                            document.getElementById('printModal').style.display='block';
-                           
-
-
-                      //if(!isSmall){      
-                        /*
-                        infowindow = new google.maps.InfoWindow({
-                           minWidth:310
-                        });
-                        infowindow.setContent(marker.content);
-                        infowindow.open(map,marker);
-                        */
-                    //  } else{
-                      
-                      
-                  
-                         
-                   //   }
-                        currentlocation = marker.id;
-
-                    };
-                })(marker,markercontent,infowindow)); 
-       //   }
-    } 
-  }
 
   function setMapOnAll(map) {
-    for (var i = 0; i < markers.length; i++) {
+    for (let i = 0; i < markers.length; i++) {
       markers[i].setMap(map);
     }
   } 
@@ -369,7 +267,7 @@ function deleteMarkers() {
 
 
 function openPrintModal(){
-  var tourcontent = document.getElementById('direction-panel').innerHTML;
+  let tourcontent = document.getElementById('direction-panel').innerHTML;
  document.getElementById('direction-panel-modal').innerHTML = tourcontent; 
   document.getElementById('printModal').style.display='block';
 }

@@ -1,8 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&family=Noto+Sans+JP:wght@100;300;400;500;700&family=Oswald:wght@200;300;400;500;600;700&display=swap');
 
+h1, h2, h3, h4, h5, h6 {
+  font-family:'Montserrat', 'Oswald',sans-serif;
+  font-weight: 400;
+  margin: 0 0 10px 0 !important;
+}
+
+.row img.icon{max-width:35px;}
 .container{
   max-width:1480px;
 }
+
+.fa.fa-trash, .fa.fa-arrow-down, .fa.fa-arrow-up{
+  margin:0 10px;
+  cursor:pointer;
+}
+
 
 body, html{
   font-family:'Montserrat', 'Oswald',sans-serif;
@@ -108,8 +121,11 @@ header{
   margin: 20px 0 20px 0;
   position: absolute;
   bottom: 20px;
-  left:20px;
+  left: 20px;
   z-index: 2;
+  background: rgba(255,255,255,0.8);
+  padding: 10px;
+  border-radius: 5px;
 }
 /*
 #printModal .btn{display:none !important;}

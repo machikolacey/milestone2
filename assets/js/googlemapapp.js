@@ -47,8 +47,8 @@ function initialize() {
     let zoom = 14;let lat =0; let lng = 0;
  
     let myOptions = {
-      center: new google.maps.LatLng(categories[currentcategory]['lat'], categories[currentcategory]['lng']),
-      zoom: categories[currentcategory]['zoom'],
+     center: new google.maps.LatLng(categories[currentcategory]['lat'], categories[currentcategory]['lng']),
+   zoom: categories[currentcategory]['zoom'],
       mapTypeId: google.maps.MapTypeId.ROADMAP
 
     };
@@ -120,7 +120,7 @@ function setMarkers(map,locations){
                 optimized: false
         });
         markers.push(marker);
-        map.setCenter(marker.getPosition())
+    //    map.setCenter(marker.getPosition())
 
         google.maps.event.addListener(marker,'click', (function(marker,markercontent, position, content, title, id){ 
           return function() {
@@ -152,8 +152,7 @@ function updateTour(){
       }
 
       return '<li>'+orglocations[item]["title"] 
-      + "<button class='btn btn-danger btn-sm remove-from-tour' destid='"
-      + orglocations[item]["id"]+"' onclick='removeLocation("+item+")'>Remove</button>"
+      + "<i class='fa fa-trash'"   + orglocations[item]["id"]+"' onclick='removeLocation("+item+")' aria-hidden='true'></i>"
       +  upArrow  + downArrow +" </li>";
     
     }).join(' ');
@@ -262,9 +261,9 @@ function removeLocation(id){
 
 function resetTour(){
   yourtourids = [];
- // updateTour();
- // resetDistance();
-  initialize();
+ updateTour();
+resetDistance();
+  //initialize();
   document.getElementById("yourtour-panel").style.display="none";
   document.getElementById("resetpanels").style.display="none";
 }

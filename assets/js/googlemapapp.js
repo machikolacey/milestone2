@@ -13,6 +13,10 @@ let map;
 
 window.addEventListener('resize', checkBrowserSize);
 
+
+
+/* This function detects if the device is a tablet or a phone 
+when the page is loaded and resezed */
   function checkBrowserSize(){
     console.log('checkBrowserSize');
 
@@ -22,6 +26,11 @@ window.addEventListener('resize', checkBrowserSize);
   }
 
 
+
+/* 
+This imports JSON data from data-brighton.json,
+and convert it to arrays.
+*/
   fetch("./assets/js/data-brighton.json", {
       headers : { 
         'Content-Type': 'application/json',
@@ -37,44 +46,51 @@ window.addEventListener('resize', checkBrowserSize);
       locations[i]["id"] = i;
     }
 
+    /* Category 0 = ALL, 1 = Tourists Attractions, 2 = Parks  */
     currentcategory = 0;
-    currentcat = "all";
     initialize();
   });
 
-
+  /* 
+  This function sets Markers based on the current locations array 
+   */
 function initialize() {
-    let zoom = 14;let lat =0; let lng = 0;
  
     let myOptions = {
      center: new google.maps.LatLng(categories[currentcategory]['lat'], categories[currentcategory]['lng']),
-   zoom: categories[currentcategory]['zoom'],
+     zoom: categories[currentcategory]['zoom'],
       mapTypeId: google.maps.MapTypeId.ROADMAP
 
     };
-    map = new google.maps.Map(document.getElementById("default"),myOptions);
+    map = new google.maps.Map(document.getElementById("mydreammap"),myOptions);
 
     setMarkers(map, locations)
 
-  }
+}
  
-
-
+/*
+ This function filteres the location array when an user click 'Filter by category' button 
+  and resets the marker by calling initialize();
+*/
 function filterCategory(category){
 
    currentcategory = category;
    
    if(category == 0){
-    locations = orglocations;
-   }else{
-    locations = orglocations.filter( i => i.category == category );
-   }
  
-   console.log(locations);
+    locations = orglocations;
+ 
+   }else{
+ 
+    locations = orglocations.filter( i => i.category == category );
+ 
+  }
+ 
    initialize();
 
 }
    
+/* This sets markers based on the locations array */
 function setMarkers(map,locations){
 
   let marker, i
@@ -87,13 +103,14 @@ function setMarkers(map,locations){
       let photo = "";
 
       if(locations[i]['youtube'] != undefined ){    
-          embed = "<iframe width='100%' height='280' src='https://www.youtube.com/embed/"+locations[i]['youtube']+"' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
+          embed = `<iframe width='100%' height='280' src='https://www.youtube.com/embed/${locations[i]['youtube']}' 
+          frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>`;
       }
       if(locations[i]['youtube'] == undefined && locations[i]['photo'] != undefined){    
-        photo = "<img src='assets/images/"+locations[i]['photo']+"' alt='"+locations[i]['title']+"' class='location-photo' />"
+        photo = `<img src='assets/images/${locations[i]['photo']}' alt='"+locations[i]['title']+"' class='location-photo' />`;
       }
       let button = "<button class='btn btn-primary add-to-tour d-inline-block' id='add-to-yourtour' onclick='addLocation("+locations[i]['id']+")'>Add to your tour</button>";
-      let currentlocation;
+  //    let currentlocation;
 
       let markercontent = "<h3>" + locations[i]['title'] +  "</h3>";   
       let title =  locations[i]['title'] ;
@@ -139,25 +156,34 @@ function setMarkers(map,locations){
       } 
 }
 
+
+
+/* 
+This function updates the tour  based on the current locations array,
+creates 'yourtour' list and displays the tour in the box
+*/
 function updateTour(){
     let text = yourtourids.map((item,i, arr) => {
       let downArrow = upArrow ="";
 
       if(i > 0)
       {
-         upArrow =  "<span id='plus' onclick='reorderPlus("+i+")'><i class='fa fa-arrow-up' aria-hidden='true'></i></span>";
+         upArrow =  `<span id='plus' onclick='reorderPlus(${i})'>
+         <i class='fa fa-arrow-up' aria-hidden='true'></i></span>`;
       }
       if(arr.length - 1 !== i){
-         downArrow = "<span id='minus' onclick='reorderMinus("+i+")'><i class='fa fa-arrow-down' aria-hidden='true'></i></span>";
+         downArrow = `<span id='minus' onclick='reorderMinus(${i})'>
+         <i class='fa fa-arrow-down' aria-hidden='true'></i></span>`;
       }
 
-      return '<li>'+orglocations[item]["title"] 
-      + "<i class='fa fa-trash'"   + orglocations[item]["id"]+"' onclick='removeLocation("+item+")' aria-hidden='true'></i>"
-      +  upArrow  + downArrow +" </li>";
+      return `<li>${orglocations[item]["title"]}
+      <i class='fa fa-trash'${orglocations[item]["id"]}' 
+      onclick='removeLocation("+item+")' aria-hidden='true'>
+      </i>${upArrow}  ${downArrow}</li>`;
     
     }).join(' ');
 
-    let text1 = "<ol id='tourlist'>"+text+"</ol> ";
+    let text1 = `<ol id='tourlist'>${text}</ol> `;
     let text2 = "";
 
     if(yourtourids.length > 1){
@@ -169,25 +195,28 @@ function updateTour(){
     document.getElementById("yourtour").innerHTML =  text1 + text2; 
 }
 
+/* 
+This function swaps the order of the tour id, with the one next
+*/
 function reorderPlus(id){
-console.log(id);
-console.log(yourtourids);
-x= id, y= id-1;
-yourtourids[x] = yourtourids.splice(y, 1, yourtourids[x])[0];
-console.log(yourtourids);
-updateTour();
+  x= id, y= id-1;
+  yourtourids[x] = yourtourids.splice(y, 1, yourtourids[x])[0];
+  updateTour();
 }
 
-
+/* 
+This function swaps the order of the tour id, with the one previous
+*/
 function reorderMinus(id){
-  console.log(id);
-console.log(yourtourids);
-x= id, y= id+1;
-yourtourids[x] = yourtourids.splice(y, 1, yourtourids[x])[0];
-console.log(yourtourids);
-updateTour();
-  }
+  x= id, y= id+1;
+  yourtourids[x] = yourtourids.splice(y, 1, yourtourids[x])[0];
+  updateTour();
+}
 
+/* 
+This function sets origin and destination for each path from one place to the other, 
+and calls calculateAndDisplayRoute function.
+*/
 function distancCalculator(id, key){  
   let nextid = yourtourids[key+1];
   if(nextid!=undefined){
@@ -197,10 +226,16 @@ function distancCalculator(id, key){
   }
 }
 
+/* 
+This function uses Google Maps DirectionsService to get information of directions,
+and displays the directions on the map.
+*/
 function calculateAndDisplayRoute(origin, destination) {   
   let directionsService = new google.maps.DirectionsService();
   let directionsRenderer = new google.maps.DirectionsRenderer();
- deleteMarkers();
+  
+  deleteMarkers();
+  
   directionsService.route(
       {
         origin: origin,
@@ -228,8 +263,10 @@ function calculateAndDisplayRoute(origin, destination) {
       });
 }
 
-
-
+/*
+This function adds location to the yourtourids array,
+and displays 
+*/
 function addLocation(id){
 
       if(!yourtourids.includes(id)){
@@ -240,13 +277,15 @@ function addLocation(id){
       }
 
    updateTour();
-  document.getElementById('direction-panel-modal').innerHTML = ""; 
-  document.getElementById("printModal").style.display="none";
+   document.getElementById('direction-panel-modal').innerHTML = ""; 
+   document.getElementById("printModal").style.display="none";
 
 }
 
 
-
+/* 
+   This function removes id from yourtourids array, when an user clicks on
+   remove button. */
 function removeLocation(id){
   if(yourtourids.includes(id)){
     yourtourids = yourtourids.filter(item => item !== id);
@@ -259,46 +298,55 @@ function removeLocation(id){
   }
 }
 
+
+/* This function empties yourtourids array, and updates display */
 function resetTour(){
   yourtourids = [];
- updateTour();
-resetDistance();
-  //initialize();
+  updateTour();
+  resetDistance();
+ 
   document.getElementById("yourtour-panel").style.display="none";
   document.getElementById("resetpanels").style.display="none";
 }
-function resetDistance(){
-  
+
+/* This function resets distance map, and sets initial markers on the map */
+function resetDistance(){  
   initialize();
   updateTour(); 
   document.getElementById("yourtour-panel").style.display = "none";
 }
 
 
-
+/* This function is called when = */
 function checkDistance(){
-console.log('check distance');
-console.log(yourtourids);
-let service = new google.maps.DistanceMatrixService();
-yourtourids.forEach(distancCalculator);
- document.getElementById("check-distance").style.display="block";
- document.getElementById("yourtour-panel").style.display = "block";
- document.getElementById("resetpanels").style.display = "block";
- 
+    console.log('check distance');
+    console.log(yourtourids);
+    let service = new google.maps.DistanceMatrixService();
+    yourtourids.forEach(distancCalculator);
+    document.getElementById("check-distance").style.display="block";
+    document.getElementById("yourtour-panel").style.display = "block";
+    document.getElementById("resetpanels").style.display = "block";
 }
 
-
+/*
+This function sets all the markers on available on the map.
+ */
   function setMapOnAll(map) {
     for (let i = 0; i < markers.length; i++) {
       markers[i].setMap(map);
     }
   } 
+
+  /*
+  This function removes all the markers on the map.
+  */
 function deleteMarkers() {
   setMapOnAll(null);
   markers = [];
 }
 
-
+/* This is a modal function provided by W3C Schools.
+The function is reused from their tutorial page, */
 function openPrintModal(){
   let tourcontent = document.getElementById('direction-panel').innerHTML;
  document.getElementById('direction-panel-modal').innerHTML = tourcontent; 

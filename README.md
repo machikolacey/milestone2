@@ -35,6 +35,8 @@ When loaded,
 <li>In "Your Tour", an user can click the "Move up" button to replace the order of the place with the one next.</li>
 <li>When an user clicks on the "Check Distance" button, it will display the tour map on the map, also calculates total KM, total duration, and calories consumed.</li>
 </ol>
+
+
 ## Features
 
 The Marker has my original animation, so an end user can easily identify the icon for each category.

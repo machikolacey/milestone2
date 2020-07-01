@@ -71,7 +71,10 @@ Marker Buttons - enable an user to see the destination details with a video or a
          <li><a href="https://www.w3schools.com/howto/howto_css_modals.asp" rel="nofollow">W3C Modal Box</a> - The project uses W3c's Modal Box to display destination details.  
         </li> 
        </ul>
+       
+       
 ## Testing
+
 <ol>
 <li>A Google Map with markers on destinations are shown.</li>
 <li>Click on a category button to filter markers</li>

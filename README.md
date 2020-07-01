@@ -23,18 +23,18 @@ Coming soon.
 ## UX
 
 When loaded, 
-
-1.  A Google Map with markers on destinations are shown.
-2.  An user can choose a category by clicking on a category button to filter markers
-3.  When an user clicks on a marker, a popup is shown to display the information of the destination
-4.  The dialog has two buttons - "Add to your tour" and "Close"
-5.  When an user clicks on "Add to your tour", it will add the destination to the tour plan and display the name of the destination in "Your Tour" box.
-6.  When an user clicks on "Close" button, it closes the dialog
-7.  In "Your Tour", an user can click the "delete" button to delete the destination from the tour
-7.  In "Your Tour", an user can click the "Move up" button to replace the order of the place with the one before.
-8.  In "Your Tour", an user can click the "Move up" button to replace the order of the place with the one next.
-9.  When an user clicks on the "Check Distance" button, it will display the tour map on the map, also calculates total KM, total duration, and calories consumed.
-
+<ol>
+<li>A Google Map with markers on destinations are shown.</li>
+<li>An user can choose a category by clicking on a category button to filter markers</li>
+<li>When an user clicks on a marker, a popup is shown to display the information of the destination</li>
+<li>The dialog has two buttons - "Add to your tour" and "Close"</li>
+<li>When an user clicks on "Add to your tour", it will add the destination to the tour plan and display the name of the destination in "Your Tour" box.</li>
+<li>When an user clicks on "Close" button, it closes the dialog</li>
+<li>In "Your Tour", an user can click the "delete" button to delete the destination from the tour</li>
+<li>In "Your Tour", an user can click the "Move up" button to replace the order of the place with the one before.</li>
+<li>In "Your Tour", an user can click the "Move up" button to replace the order of the place with the one next.</li>
+<li>When an user clicks on the "Check Distance" button, it will display the tour map on the map, also calculates total KM, total duration, and calories consumed.</li>
+</ol>
 ## Features
 
 The Marker has my original animation, so an end user can easily identify the icon for each category.
@@ -57,24 +57,32 @@ Marker Buttons - enable an user to see the destination details with a video or a
 
 ## Technologies Used
 
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
-
-Google Maps Platform - Maps Javascript API
-To display markers, informations
-
-Google Maps Platform - Directions API
-To display directions on the map, calculate total distance and time by walking
-
-Bootstrap
-Bootstrap to display a clean responsive layout.
-
-FontAwesome
-The project uses FontAwesome to display effective buttons.
-
-W3C Modal Box
-The project uses W3c's Modal Box to display destination details.
-https://www.w3schools.com/howto/howto_css_modals.asp
-
+ <ul>
+         <li>Javascript</li>
+        <li><a href="https://developers.google.com/maps/documentation/javascript/tutorial" rel="nofollow">Google Maps Platform - Maps Javascript API</a>
+            <ul>
+            <li>To display markers, informations</li>
+            </ul>
+        </li>
+              <li><a href="https://developers.google.com/maps/documentation/directions/start" rel="nofollow">Google Maps Platform - Directions API</a>
+            <ul>
+            <li>To display directions on the map, calculate total distance and time by walking</li>
+            </ul>
+        </li>
+        <li><a href="https://getbootstrap.com/" rel="nofollow">Bootstrap</a>
+            <ul>Bootstrap</strong> to display a clean responsive layout.</li>
+            </ul>
+        </li>
+        <li><a href="https://fontawesome.com/" rel="nofollow">FontAwesome</a>
+            <ul>
+            <li>The project uses <strong>FontAwesome</strong> to display effective buttons.
+            </li>
+            <li><a href="https://www.w3schools.com/howto/howto_css_modals.asp" rel="nofollow">W3C Modal Box</a>
+             <ul><li>The project uses W3c's Modal Box to display destination details.   </li>
+            </li>
+            </ul>
+        </li>
+        </ul>
 ## Testing
 <ol>
 <li>A Google Map with markers on destinations are shown.</li>

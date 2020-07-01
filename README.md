@@ -76,21 +76,21 @@ The project uses W3c's Modal Box to display destination details.
 https://www.w3schools.com/howto/howto_css_modals.asp
 
 ## Testing
+<ol>
+<li>A Google Map with markers on destinations are shown.</li>
+<li>Click on a category button to filter markers</li>
+<li>Click on a marker to see the popup modal to come up to display the details of the destination</li>
+<li>On the dialog, click on  "Add to your tour" button, to see if the destination title is added to the tour, and displayed under "Your Tour" heading.</li>
+<li>On the dialog, click on  "Add to your tour" button, to see if the dialog closes.</li>
 
-1.  A Google Map with markers on destinations are shown.
-2.  Click on a category button to filter markers
-3.  Click on a marker to see the popup modal to come up to display the details of the destination
-4.  On the dialog, click on  "Add to your tour" button, to see if the destination title is added to the tour, and displayed under "Your Tour" heading.
-5.  On the dialog, click on  "Add to your tour" button, to see if the dialog closes.
-
-6.  When an user clicks on "Close" button, it closes the dialog
-7.  In "Your Tour", click on the "delete" button to delete the destination from the tour
-7.  In "Your Tour", click on the "Move up" button to replace the order of the place with the one before.
-8.  In "Your Tour", click on  the "Move up" button to replace the order of the place with the one next.
-9.  click on  the "Check Distance" button, it will display the tour map on the map, also calculates total KM, total duration, and calories consumed.
-10. Click on "Remove" button on all destinations to see if it removes all the destinations in the tour, and displays all the markers on the map without issues.
-11. Test 1 to 10 on tablet and mobile phone sizes.
-
+<li>When an user clicks on "Close" button, it closes the dialog</li>
+<li>In "Your Tour", click on the "delete" button to delete the destination from the tour</li>
+<li>In "Your Tour", click on the "Move up" button to replace the order of the place with the one before.</li>
+<li>In "Your Tour", click on  the "Move up" button to replace the order of the place with the one next.</li>
+<li>click on  the "Check Distance" button, it will display the tour map on the map, also calculates total KM, total duration, and calories consumed.</li>
+<li>Click on "Remove" button on all destinations to see if it removes all the destinations in the tour, and displays all the markers on the map without issues.</li>
+<li>Test 1 to 10 on tablet and mobile phone sizes.</li>
+</ol>
 ## Deployment
 
 The page is deployed by Github pages. There is only master branch.

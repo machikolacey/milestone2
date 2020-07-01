@@ -177,8 +177,8 @@ function updateTour(){
       }
 
       return `<li>${orglocations[item]["title"]}
-      <i class='fa fa-trash'${orglocations[item]["id"]}' 
-      onclick='removeLocation("'${item}'")' aria-hidden='true'>
+      <i class='fa fa-trash'
+      onclick='removeLocation(${item})' aria-hidden='true'>
       </i>${upArrow}  ${downArrow}</li>`;
     
     }).join(' ');

@@ -59,30 +59,18 @@ Marker Buttons - enable an user to see the destination details with a video or a
 
  <ul>
          <li>Javascript</li>
-        <li><a href="https://developers.google.com/maps/documentation/javascript/tutorial" rel="nofollow">Google Maps Platform - Maps Javascript API</a>
-            <ul>
-            <li>To display markers, informations</li>
-            </ul>
+         <li><a href="https://developers.google.com/maps/documentation/javascript/tutorial" rel="nofollow">Google Maps Platform - Maps Javascript API</a> - To display markers, informations
         </li>
-              <li><a href="https://developers.google.com/maps/documentation/directions/start" rel="nofollow">Google Maps Platform - Directions API</a>
-            <ul>
-            <li>To display directions on the map, calculate total distance and time by walking</li>
-            </ul>
+        <li><a href="https://developers.google.com/maps/documentation/directions/start" rel="nofollow">Google Maps Platform - Directions API</a> - To display directions on the map, calculate total distance and time by walking
         </li>
-        <li><a href="https://getbootstrap.com/" rel="nofollow">Bootstrap</a>
-            <ul>Bootstrap</strong> to display a clean responsive layout.</li>
-            </ul>
+        <li>
+           <a href="https://getbootstrap.com/" rel="nofollow">Bootstrap</a> - to display a clean responsive layout.
         </li>
-        <li><a href="https://fontawesome.com/" rel="nofollow">FontAwesome</a>
-            <ul>
-            <li>The project uses <strong>FontAwesome</strong> to display effective buttons.
-            </li>
-            <li><a href="https://www.w3schools.com/howto/howto_css_modals.asp" rel="nofollow">W3C Modal Box</a>
-             <ul><li>The project uses W3c's Modal Box to display destination details.   </li>
-            </li>
-            </ul>
+        <li><a href="https://fontawesome.com/" rel="nofollow">FontAwesome</a> - The project uses <strong>FontAwesome</strong> to display effective buttons.
         </li>
-        </ul>
+         <li><a href="https://www.w3schools.com/howto/howto_css_modals.asp" rel="nofollow">W3C Modal Box</a> - The project uses W3c's Modal Box to display destination details.  
+        </li> 
+       </ul>
 ## Testing
 <ol>
 <li>A Google Map with markers on destinations are shown.</li>

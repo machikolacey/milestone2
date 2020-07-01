@@ -301,7 +301,31 @@
             "postcode" :  "BN2 5JJ",
             "photo" : "photo-cafe-marmalade.jpg",
             "category": 2
+          },
+          {
+            "title": "Churchill Square Shopping Centre",
+            "shortitle" : "Churchill Square",
+            "lat": 50.822988, 
+            "lng": -0.145921,
+            "website" : "https://www.churchillsquare.com/",
+            "description":"Churchill Square, named after the UK Prime Minister Winston Churchill, is the principal shopping centre in the centre of Brighton and Hove, a city on the south coast of England. It is at the eastern end of Western Road, near the Clock Tower.",
+            "address": "Russell Pl, Brighton", 
+            "postcode" :  "BN1 2RG",
+            "photo" : "photo-churchill-square.jpg",
+            "category": 1
+          },
+          {
+            "title": "Volk's Electric Railway",
+            "shortitle" : "Volk's Railway",
+            "lat": 50.818758, 
+            "lng":-0.132835,
+            "website" : "https://volksrailway.org.uk/",
+            "description":"Volk's Electric Railway (VER) is a narrow gauge heritage railway that runs along a length of the seafront of the English seaside resort of Brighton. ",
+            "address": "Volk's Electric Railway Visitor Centre, Madeira Dr, Brighton", 
+            "postcode" :  "BN2 1EN",
+            "photo" : "photo-volks-electric-railway.jpg",
+            "category": 1
           }
          
-
+          
     ]

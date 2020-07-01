@@ -17,7 +17,13 @@ By Clicking on "Check Distance" button, they can see total duration, total dista
 
 ## Wireframe
 
-Coming soon.
+https://machikolacey.github.io/milestone1/assets/wireframe/ms2_wireframe.pdf
+
+
+
+## Deployed Page
+
+https://machikolacey.github.io/milestone2/
 
 
 ## UX

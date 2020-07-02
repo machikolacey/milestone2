@@ -177,8 +177,7 @@ function updateTour(){
       }
 
       return `<li>${orglocations[item]["title"]}
-      <i class='fa fa-trash'
-      onclick='removeLocation(${item})' aria-hidden='true'>
+      <br /><i class='fa fa-trash' onclick='removeLocation(${item})' aria-hidden='true'>
       </i>${upArrow}  ${downArrow}</li>`;
     
     }).join(' ');
@@ -188,8 +187,9 @@ function updateTour(){
 
     if(yourtourids.length > 1){
       let e = document.createElement('div');
-      text2  = "<button id='check-distance' class='btn btn-secondary d-inline-block' onclick='checkDistance()'>Check Distance</button>";
-      text2 += "  <button id='reset-tour' class='btn btn-secondary d-inline-block' onclick='resetTour()'>Reset Tour</button>";
+      text2  = "<button id='check-distance' class='btn btn-secondary dc-inline-block' onclick='checkDistance()'>Check Distance</button>";
+      text2 += "<button id='reset-tour' class='btn btn-secondary dc-inline-block' onclick='resetTour()'>Reset Tour</button>";
+      text2 += "<button id='reset-distance' class='btn btn-secondary dc-inline-block' onclick='resetDistance()'>Return to Map</button>";
     }
 
     document.getElementById("yourtour").innerHTML =  text1 + text2; 
@@ -235,7 +235,8 @@ function calculateAndDisplayRoute(origin, destination) {
   let directionsRenderer = new google.maps.DirectionsRenderer();
   
   deleteMarkers();
-  
+
+
   directionsService.route(
       {
         origin: origin,
@@ -251,7 +252,7 @@ function calculateAndDisplayRoute(origin, destination) {
       console.log(routeinfo.duration.text);
       document.getElementById("totaldistance").innerHTML = "Total distance ="+ Math.round( totaldistance/1000 ) + "KM"; 
       document.getElementById("totalduration").innerHTML ="Total duration ="+ totalmiutes + "MINUTES";     
-      document.getElementById("totalcalories").innerHTML = "Calories consumed = " + Math.round(totalmiutes*10)+"kcal";
+      document.getElementById("totalcalories").innerHTML = "Calories burned = " + Math.round(totalmiutes*10)+"kcal";
 
       if (status === 'OK') {
           directionsRenderer.setDirections(response);
@@ -319,11 +320,13 @@ function resetDistance(){
 
 /* This function is called when = */
 function checkDistance(){
+  totaldistance = totalduration = totalcalories = 0;
+  console.log('checkDistance');
     console.log('check distance');
     console.log(yourtourids);
     let service = new google.maps.DistanceMatrixService();
     yourtourids.forEach(distancCalculator);
-    document.getElementById("check-distance").style.display="block";
+    document.getElementById("reset-distance").style.display="inline-block";
     document.getElementById("yourtour-panel").style.display = "block";
     document.getElementById("resetpanels").style.display = "block";
 }

@@ -1,11 +1,6 @@
 <html>
 <head>
-<script  src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
-<script type="text/javascript"  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxC5b3wNV-jG0q82g355HOZ3ucc8q9igw&sensor=false"></script>
 
-<script type="text/javascript" src="assets/js/map-icons.min.js"></script>
-<script type="text/javascript" src="assets/js/googlemapapp.js"></script>
-<script type="text/javascript" src="assets/js/categories.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -14,12 +9,16 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
 <link rel="icon" type="image/png" href="assets/images/favicon.png">
-<link rel="stylesheet" href="assets/css/dragula.min.css">
 
 <title>Brighton Walking Tour Planner</title>
 </head>
 <body onload="checkBrowserSize()">
-  <header><h2 id="logo"><i class="fa fa-map-marker" aria-hidden="true"></i>Brighton walking tour planner</h2></header>
+  <header>
+    <h2 id="logo">
+      <img src="assets/images/skywheel.png" alt="Skywheel Image">
+      Brighton walking tour planner
+    </h2>
+  </header>
 <div class="container">
 
 <div id="tourcontent" class="right-panel">
@@ -50,7 +49,7 @@
       <button class="btn btn-primary category" id="category3" onclick="filterCategory(3)"> <img src="assets/images/mapicons/mapicon-park.svg" alt="Parks" class="icon"> Parks</button>
       <button class="btn btn-primary category" id="category0" onclick="filterCategory(0)"><img src="assets/images/mapicons/mapicon-all.svg" alt="All" class="icon">All</button>
     </div>
-    <div id="mydreammap" style=""></div>
+    <div id="mydreammap" ></div>
 </div>
 </div>
 
@@ -81,7 +80,12 @@
 </div>
 
 
+<script  src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+<script type="text/javascript"  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxC5b3wNV-jG0q82g355HOZ3ucc8q9igw&sensor=false"></script>
 
+<script type="text/javascript" src="assets/js/map-icons.min.js"></script>
+<script type="text/javascript" src="assets/js/googlemapapp.js"></script>
+<script type="text/javascript" src="assets/js/categories.js"></script>
 
 
 </body>

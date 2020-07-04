@@ -98,6 +98,8 @@ Marker Buttons - enable an user to see the destination details with a video or a
 <li>Click on "Remove" button on all destinations to see if it removes all the destinations in the tour, and displays all the markers on the map without issues.</li>
 <li>Test 1 to 10 on tablet and mobile phone sizes.</li>
 </ol>
+
+
 ## Deployment
 
 The page is deployed by Github pages. There is only master branch.

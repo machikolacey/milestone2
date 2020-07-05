@@ -1,4 +1,4 @@
-let yourtour = [];
+let yourtour =  [];
 let yourtourids = [];
 let locations = [];
 let orglocations = [];
@@ -19,11 +19,11 @@ window.addEventListener('resize', checkBrowserSize);
 /* This function detects if the device is a tablet or a phone 
 when the page is loaded and resezed */
   function checkBrowserSize(){
-    console.log('checkBrowserSize');
 
     if(window.innerWidth < 768){
       isSmall = true;
     }
+    
   }
 
 /* 

@@ -12,7 +12,7 @@ They can delete the destination by clicking on "Delete" button next to the desti
 
 By Clicking on "Check Distance" button, they can see total duration, total distance in KM, and total calories consumed below "Your Tour" box.
 
-
+The purpose of this web page is for an user to plan an appropriate walking tour plan for the day. They can see the details of each destination and choose them to include in their tour, and when they click on "Check Distance" button they can see how long it will take, how long they will walk,  and how much calories will be burned.
 
 
 ## Wireframe
@@ -20,15 +20,14 @@ By Clicking on "Check Distance" button, they can see total duration, total dista
 https://machikolacey.github.io/milestone2/assets/wireframe/ms2_wireframe.pdf
 
 
-
-## Deployed Page
-
-https://machikolacey.github.io/milestone2/
-
-
 ## UX
 
-When loaded, 
+This page starts with a Google map with location markers. An user can click on each marker to see the details on a popup modal. They can see either photo or an Youtube video, also a short description.
+
+After adding 2 or more locations, then they can check distance by clicking on "Check Distance" button.
+
+The steps:
+ 
 <ol>
 <li>A Google Map with markers on destinations are shown.</li>
 <li>An user can choose a category by clicking on a category button to filter markers</li>
@@ -102,7 +101,14 @@ Marker Buttons - enable an user to see the destination details with a video or a
 
 ## Deployment
 
-The page is deployed by Github pages. There is only master branch.
+Deployed page:
+https://machikolacey.github.io/milestone2/
+
+The page is deployed by Github pages. There is only master branch. 
+
+There is no past versions to look at so far.
+
+To run it locally, download all the files into the folder in your local server's root folder. data-brighton.json and categories.js has all the data and it imports it when the page is loaded.
 
 
 ## Credits

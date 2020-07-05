@@ -14,6 +14,7 @@ By Clicking on "Check Distance" button, they can see total duration, total dista
 
 The purpose of this web page is for an user to plan an appropriate walking tour plan for the day. They can see the details of each destination and choose them to include in their tour, and when they click on "Check Distance" button they can see how long it will take, how long they will walk,  and how much calories will be burned.
 
+This site is for educational purposes only.
 
 ## Wireframe
 

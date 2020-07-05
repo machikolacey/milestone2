@@ -325,7 +325,93 @@
             "postcode" :  "BN2 1EN",
             "photo" : "photo-volks-electric-railway.jpg",
             "category": 1
+          },
+          {
+            "title": "Hove Museum",
+            "shortitle" : "Hove Museum",
+            "lat":  50.829829,
+            "lng": -0.181147,
+            "website" : "https://brightonmuseums.org.uk/hove/",
+            "description":"Step into a world of toys, cinema, local history, and fine art. Hove Museum & Art Gallery is a family friendly museum with one of the finest craft collections in the UK. ",
+            "address": "19 New Church Rd, Hoven", 
+            "postcode" :  "BN3 4AB",
+            "youtube" : "UlG8aX7aB8E",
+            "category": 1
+          },
+          {
+            "title": "GAIL's Bakery",
+            "shortitle" : "GAIL's Bakery",
+            "lat":  50.826191, 
+            "lng": -0.138365,
+            "website" : "http://www. gailsbread.co.uk",
+            "description":"Whilst being a chain, the Hove café has a really homely feel. Who can resists these yummy-looking baked goods? ",
+            "address": "93 North Rd, Brighton", 
+            "postcode" :  "BN1 1YE",
+            "youtube" : "_C6Kjv8oquI",
+            "category": 2
+          },
+          {
+            "title": "The Goldstone",
+            "shortitle" : "The Goldstone",
+            "lat":  50.8395, 
+            "lng": -0.1738,
+            "website" : "https://www.brighton-hove.gov.uk/content/leisure-and-libraries/parks-and-green-spaces/hove-park",
+            "description":"WHO WOULD HAVE THOUGHT THAT a serene family park in suburban Hove was once a honeypot for Druidic worship and sacrifice? What appears to be just another boulder is in fact the fabled Goldstone, a 20-ton lump of sandstone and flint with flecks of gold sprinkled throughout giving the rock its name. And while the Goldstone itself isn’t that awe-inspiring, its story is much more compelling.",
+            "address": "93 North Rd, Brighton", 
+            "postcode" :  "BN1 1YE",
+            "photo" : "photo-the-goldstone.jpg",
+            "category": 1
+          },
+          {
+            "title": "Hove Park Cafe",
+            "shortitle" : "Hove Park Cafe",
+            "lat":  50.840678, 
+            "lng": -0.172858,
+           "description":"Hove Park's hub, The Hove Park Cafe, both food and drink hot and cold.",
+            "address": "Park View Rd, Hove", 
+            "postcode" :  "BN3 7BF",
+            "photo" : "photo-hove-park-cafe.jpg",
+            "category": 2
+          },
+          {
+            "title": "Dyke Road Park Cafe",
+            "shortitle" : "Dyke Road Park Cafe",
+            "lat": 50.837225,  
+            "lng": -0.152808,
+           "description":"Located in the middle of Brighton & Hove with surroundings of a peaceful rose garden, blue seas and overlooking a city view.",
+            "address": "Tea Chalet, Dyke Rd, Hove", 
+            "postcode" :  "BN3 6EH",
+            "photo" : "dyke-road-park-cafe.jpg",
+            "category": 2
+          },
+          {
+            "title": "Hilltop Cafe",
+            "shortitle" : "Hilltop Cafe",
+            "lat": 50.857737, 
+            "lng": -0.173693,
+             "description":"A small independent cafe located on Dyke Road Brighton serving Gourmet Burgers, Brunch and Coffee. We serve local meat, bread & coffee sourced from sussex.",
+            "address": "Dyke Rd Ave, Brighton", 
+            "postcode" :  "BN1 5LF",
+            "website" : "http://www.threecorneredcopse.org.uk/",
+            "photo" : "photo-hilltop-cafe.jpg",
+            "category": 1
+          },
+          {
+            "title": "West Blatchington Windmill",
+            "shortitle" : "The Windmill",
+            "lat": 50.846687, 
+            "lng": -0.185158,
+             "description":"Dating from the 1820's, this Grade II Listed building still has all the original mill workings in place. Visitors can discover how grain is turned into flour in a traditional smock windmill and also explore a fascinating display of historical and agricultural exhibits.",
+            "address": "Holmes Avenue, Hove", 
+            "postcode" :  "BN3 7LH",
+            "website" : "https://www.westblatchingtonwindmill.org/",
+            "photo" : "photo-west-blatchington-windmill.jpg",
+            "category": 1
           }
          
+         
+         
+
+          
           
     ]

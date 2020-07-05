@@ -117,12 +117,23 @@ To run it locally, download all the files into the folder in your local server's
 ### Content
 - All the marker icons are made by Machiko Lacey-Kimura.
 
+- Descriptions, address, details are taken from:
+https://www.atlasobscura.com/
+https://restaurantsbrighton.co.uk
+https://www.getawriggleon.com
+https://www.brighton-hove.gov.uk/
+https://www.atlasobscura.com/places/the-goldstone-hove-england
+https://www.google.co.uk/maps
+https://www.facebook.com
+
 
 ### Media
 - The photos and texts used in this website are taken from:
 https://restaurantsbrighton.co.uk
 https://www.getawriggleon.com
 https://www.brighton-hove.gov.uk/
+https://www.atlasobscura.com/places/the-goldstone-hove-england
+https://www.facebook.com
 
 - The videos used in this website are taken from:
 https://www.youtube.com/

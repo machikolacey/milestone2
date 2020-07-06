@@ -3,7 +3,6 @@ let yourtourids = [];
 let locations = [];
 let orglocations = [];
 let markers = [];
-let isSmall = false;
 let infowindow;
 let map;
 let content = "";
@@ -11,18 +10,6 @@ let routeinfo = "";
 let totaldistance = totalduration =  totalminutes = totalcalories  = currentcategory =  0;
 
 
-window.addEventListener('resize', checkBrowserSize);
-
-
-/* This function detects if the device is a tablet or a phone 
-when the page is loaded and resezed */
-  function checkBrowserSize(){
-
-    if(window.innerWidth < 768){
-      isSmall = true;
-    }
-    
-  }
 
 /* 
 This imports JSON data from data-brighton.json,
@@ -273,9 +260,6 @@ function addLocation(id){
   
     updateTour();
     resetDistance();
-   
-    document.getElementById("yourtour-panel").style.display="none";
-    document.getElementById("resetpanels").style.display="none";
   
   }
 
@@ -403,6 +387,5 @@ function checkDistance(){
     yourtourids.forEach(distancCalculator);
     document.getElementById("reset-distance").style.display="inline-block";
     document.getElementById("yourtour-panel").style.display = "block";
-    document.getElementById("resetpanels").style.display = "block";
 }
 

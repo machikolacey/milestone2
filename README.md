@@ -1,4 +1,4 @@
-# Brighton & Hove Walking Tour Planner
+# Brighton Walking Tour Planner
 
 This is aiming to make a walking tour plan easy utilising Google Map API.
 On a Map, they can click on a marker to see the descriptions, a photo or an Youtube video to see what's there.

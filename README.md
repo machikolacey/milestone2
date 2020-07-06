@@ -82,6 +82,16 @@ Marker Buttons - enable an user to see the destination details with a video or a
        
        
 ## Testing
+This code was tested by using PC, tablet, and android phone, also using Google Chrome's Responsive Tester. This repository was tested by peer code review channel on Code Institute's community on Slack.
+
+Also, this was run through these validators.
+
+<ul>
+<li><a href="https://jigsaw.w3.org/css-validator/" target="_blank">CSS Validation Service</a></li>
+<li><a href="https://validator.w3.org/" target="_blank">Markup Validation Service</a></li>
+</ul>
+
+# User Stories
 
 <ol>
 <li>A Google Map with markers on destinations are shown.</li>

@@ -8,9 +8,7 @@ let infowindow;
 let map;
 let content = "";
 let routeinfo = "";
-let totaldistance = totalduration =
-    totalminutes = totalcalories 
-    = currentcategory = 0;
+let totaldistance = totalduration =  totalminutes = totalcalories  = currentcategory =  0;
 
 
 window.addEventListener('resize', checkBrowserSize);

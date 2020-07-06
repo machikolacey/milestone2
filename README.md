@@ -89,6 +89,7 @@ Also, this was run through these validators.
 <ul>
 <li><a href="https://jigsaw.w3.org/css-validator/" target="_blank">CSS Validation Service</a></li>
 <li><a href="https://validator.w3.org/" target="_blank">Markup Validation Service</a></li>
+<li><a href="https://jshint.com/" target="_blank">JS Hint</a></li>
 </ul>
 
 # User Stories

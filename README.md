@@ -91,7 +91,7 @@ Also, this was run through these validators.
 <li><a href="https://validator.w3.org/" target="_blank">Markup Validation Service</a></li>
 </ul>
 
-# User Stories
+<h3>User Stories</h3>
 
 <ol>
 <li>A Google Map with markers on destinations are shown.</li>

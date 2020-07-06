@@ -102,14 +102,19 @@ Marker Buttons - enable an user to see the destination details with a video or a
 
 ## Deployment
 
-Deployed page:
-https://machikolacey.github.io/milestone2/
+My repository can be found on Github. I used HTML, CSS and javascript and no database.
 
 The page is deployed by Github pages. There is only master branch. 
 
-There is no past versions to look at so far.
+There is no past versions to look at so far. Deployed page is found here:
+https://machikolacey.github.io/milestone2/
 
-To run it locally, download all the files into the folder in your local server's root folder. data-brighton.json and categories.js has all the data and it imports it when the page is loaded.
+To run this reponsitory locally, you could
+<ul>
+<li>Follow the respository link above to the GitHub Dashboard, and click on "Clone" or "Download".</li>
+<li>If you "Clone", initialize git on your local environment's folder and clone the file by pasting the copied command on your command line.</li>
+<li>If you "Downlowd" expand and copy all the files downloaded into the folder in your chosen development environment.</li>
+</ul>
 
 
 ## Credits
